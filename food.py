@@ -6,17 +6,22 @@ class Food:
     Type Int: [calories,fat,protein,carbs,sugars,fiber, 
                 added_sugars,saturated_fat,unsaturated_fat,]
     Type Float: [serving_size]
-    Type String: [serving_size_unit]
+    Type String: [serving_size_unit,food_name]
 
-    Class variable: valid_serving_units :list
-    valid units: ["teaspoon","tsp","tablespoon","tbsp","fluid ounce","fl oz","ounce","oz","cup","pint",
+    all units for macros are g unless otherwise stated
+    exceptions:
+    - calories
+    - serving size
+
+    valid units for serving size: ["teaspoon","tsp","tablespoon","tbsp","fluid ounce","fl oz","ounce","oz","cup","pint",
                   "quart","gallon","pound","gram","kilogram","liter","milliliter"]
     '''
     valid_serving_units = ["teaspoon","tsp","tablespoon","tbsp","fluid ounce","fl oz","ounce","oz","cup","pint",
                            "quart","gallon","pound","gram","kilogram","liter","milliliter"]
 
-    def __init__(self,calories,fat,protein,carbs,sugars,fiber,
-                 added_sugars,saturated_fat,unsaturated_fat,serving_size,serving_size_unit) -> None:
+    def __init__(self,calories:int=0,fat:int=0,protein:int=0,carbs:int=0,sugars:int=0,fiber:int=0,
+                 added_sugars:int=0,saturated_fat:int=0,unsaturated_fat:int=0,serving_size:float=0,
+                 serving_size_unit:str=None,food_name:str=None) -> None:
         self.calories=calories
         self.fat=fat
         self.protein=protein
@@ -28,6 +33,7 @@ class Food:
         self.unsaturated_fat=unsaturated_fat
         self.serving_size=serving_size
         self.serving_size_unit=serving_size_unit
+        self.food_name=food_name
     
     @property
     def calories(self):
@@ -134,9 +140,24 @@ class Food:
         return self._serving_size_unit
     @serving_size_unit.setter
     def serving_size_unit(self, value:str):
-        if value.lower() in self.valid_serving_units:
+        if value in self.valid_serving_units:
             self._serving_size_unit = value
         else:
             self._serving_size_unit=None
+
+    @property
+    def food_name(self):
+        return self._food_name
+    @food_name.setter
+    def food_name(self, value:str):
+        self._food_name = value
     
     
+    def __str__(self):
+        # includes major macros [calories,fat,protein,carbs,sugars,fiber]
+        ret = f"food item: {self.food_name}, {self.calories} cal, {self.fat}g fat,\n"
+        ret+= f"{self.protein}g protein, {self.carbs}g carbs, {self.sugars}g sugars, {self.fiber}g fiber"
+        return ret
+
+apple = Food()
+print(apple)
