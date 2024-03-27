@@ -1,4 +1,20 @@
 class Food:
+    '''
+    A class that organizes the macro-nutritional values in food.
+
+    Eleven values are tracked:
+    Type Int: [calories,fat,protein,carbs,sugars,fiber, 
+                added_sugars,saturated_fat,unsaturated_fat,]
+    Type Float: [serving_size]
+    Type String: [serving_size_unit]
+
+    Class variable: valid_serving_units :list
+    valid units: ["teaspoon","tsp","tablespoon","tbsp","fluid ounce","fl oz","ounce","oz","cup","pint",
+                  "quart","gallon","pound","gram","kilogram","liter","milliliter"]
+    '''
+    valid_serving_units = ["teaspoon","tsp","tablespoon","tbsp","fluid ounce","fl oz","ounce","oz","cup","pint",
+                           "quart","gallon","pound","gram","kilogram","liter","milliliter"]
+
     def __init__(self,calories,fat,protein,carbs,sugars,fiber,
                  added_sugars,saturated_fat,unsaturated_fat,serving_size,serving_size_unit) -> None:
         self.calories=calories
@@ -17,7 +33,7 @@ class Food:
     def calories(self):
         return self._calories
     @calories.setter
-    def calories(self, value):
+    def calories(self, value:int=0):
         if value>0:
             self._calories = value
         else:
@@ -27,7 +43,7 @@ class Food:
     def fat(self):
         return self._fat
     @fat.setter
-    def fat(self, value):
+    def fat(self, value:int=0):
         if value>0:
             self._fat = value
         else:
@@ -37,7 +53,7 @@ class Food:
     def protein(self):
         return self._protein
     @protein.setter
-    def protein(self, value):
+    def protein(self, value:int=0):
         if value>0:
             self._protein = value
         else:
@@ -47,7 +63,7 @@ class Food:
     def carbs(self):
         return self._carbs
     @carbs.setter
-    def carbs(self, value):
+    def carbs(self, value:int=0):
         if value>0:
             self._carbs = value
         else:
@@ -57,7 +73,7 @@ class Food:
     def sugars(self):
         return self._sugars
     @sugars.setter
-    def sugars(self, value):
+    def sugars(self, value:int=0):
         if value>0:
             self._sugars = value
         else:
@@ -67,7 +83,7 @@ class Food:
     def fiber(self):
         return self._fiber
     @fiber.setter
-    def fiber(self, value):
+    def fiber(self, value:int=0):
         if value>0:
             self._fiber = value
         else:
@@ -77,7 +93,7 @@ class Food:
     def added_sugars(self):
         return self._added_sugars
     @added_sugars.setter
-    def added_sugars(self, value):
+    def added_sugars(self, value:int=0):
         if value>0:
             self._added_sugars = value
         else:
@@ -87,7 +103,7 @@ class Food:
     def saturated_fat(self):
         return self._saturated_fat
     @saturated_fat.setter
-    def saturated_fat(self, value):
+    def saturated_fat(self, value:int=0):
         if value>0:
             self._saturated_fat = value
         else:
@@ -97,7 +113,7 @@ class Food:
     def unsaturated_fat(self):
         return self._unsaturated_fat
     @unsaturated_fat.setter
-    def unsaturated_fat(self, value):
+    def unsaturated_fat(self, value:int=0):
         if value>0:
             self._unsaturated_fat = value
         else:
@@ -107,7 +123,7 @@ class Food:
     def serving_size(self):
         return self._serving_size
     @serving_size.setter
-    def serving_size(self, value):
+    def serving_size(self, value:float=0):
         if value>0:
             self._serving_size = value
         else:
@@ -117,10 +133,10 @@ class Food:
     def serving_size_unit(self):
         return self._serving_size_unit
     @serving_size_unit.setter
-    def serving_size_unit(self, value):
-        if value>0:
+    def serving_size_unit(self, value:str):
+        if value.lower() in self.valid_serving_units:
             self._serving_size_unit = value
         else:
-            self._serving_size_unit = 0
+            self._serving_size_unit=None
     
     
