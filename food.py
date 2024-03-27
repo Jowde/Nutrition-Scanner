@@ -2,7 +2,7 @@ class Food:
     '''
     A class that organizes the macro-nutritional values in food.
 
-    Eleven values are tracked:
+    Twelve values are tracked:
     Type Int: [calories,fat,protein,carbs,sugars,fiber, 
                 added_sugars,saturated_fat,unsaturated_fat,]
     Type Float: [serving_size]
