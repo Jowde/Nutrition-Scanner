@@ -10,7 +10,8 @@ class Food:
     Type Float: [serving_size]
     Type String: [serving_size_unit,food_name]
 
-    all units for macros are g unless otherwise stated
+    all units for macros are grams unless otherwise stated
+    
     exceptions:
     - calories
     - serving size
