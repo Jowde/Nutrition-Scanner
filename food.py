@@ -2,6 +2,8 @@ class Food:
     '''
     A class that organizes the macro-nutritional values in food.
 
+    __init__() requires food_name as a parameter, everything else can revert to default values
+
     Twelve values are tracked:
     Type Int: [calories,fat,protein,carbs,sugars,fiber, 
                 added_sugars,saturated_fat,unsaturated_fat,]
@@ -19,9 +21,9 @@ class Food:
     valid_serving_units = ["teaspoon","tsp","tablespoon","tbsp","fluid ounce","fl oz","ounce","oz","cup","pint",
                            "quart","gallon","pound","gram","kilogram","liter","milliliter"]
 
-    def __init__(self,calories:int=0,fat:int=0,protein:int=0,carbs:int=0,sugars:int=0,fiber:int=0,
+    def __init__(self,food_name:str,calories:int=0,fat:int=0,protein:int=0,carbs:int=0,sugars:int=0,fiber:int=0,
                  added_sugars:int=0,saturated_fat:int=0,unsaturated_fat:int=0,serving_size:float=0,
-                 serving_size_unit:str=None,food_name:str=None) -> None:
+                 serving_size_unit:str=None) -> None:
         self.calories=calories
         self.fat=fat
         self.protein=protein
