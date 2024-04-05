@@ -1,0 +1,13 @@
+Sean M Roberts
+Progress report
+
+
+24.3.27
+Cloned branch for personal developing.
+Created Food class to track macronutrients.
+
+24.4.3
+Designed cage for scale and magic box for the RPi (potato)
+
+24.4.5
+
