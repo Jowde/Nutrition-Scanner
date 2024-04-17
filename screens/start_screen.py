@@ -1,24 +1,22 @@
 import Omicron_Engine as OE
 import pygame
-from pygame import Vector2, Color
-
+from pygame import Color
+DARK_BLUE = Color(0, 102, 204)
 class StartScreen(OE.Screen):
     def __init__(self, display, GameStateManager: "OE.GameStateManager"):
-        super().__init__(display, GameStateManager, Color(255,255,255))
+        super().__init__(display, GameStateManager, DARK_BLUE)
 
         self.display.fill(self.bg_color)
         
         self.main_menu = OE.Menu(
-                                    self.display, relative_size=(.75, .5), 
+                                    self.display, relative_size=(.75, .25), 
                                     layout='vertical',
-                                    bg_color= Color(123,125,125) 
+                                    bg_color= Color(123,125,125), 
+                                    position = 'topcenter'
                                  )
          
-        self.start_button = OE.Button(
-                                        menu = self.main_menu, 
-                                        bg_color = Color((125,125,255)), 
-                                        text = 'Start Game',
-                                        on_press= lambda : self.switch_state('game_screen')
+        self.start_button = OE.Label(
+                                        menu=self.main_menu,
                                     )
         
         
