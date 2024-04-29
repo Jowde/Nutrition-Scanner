@@ -10,4 +10,20 @@ Created Food class to track macronutrients.
 Designed cage for scale and magic box for the RPi (potato)
 
 24.4.5
+Upgraded cage and box
 
+24.4.12
+Rescaled cage and box to fit within Tech's 3d printing parameters
+
+24.4.17
+Tried to 3d print the stuff, but learned we needed more filament.
+The filament I brought from home was 1.75mm, but we needed 2.85mm/3mm.
+
+24.4.22
+Reassigned to work on the scale and weight calculation instead
+of the text analysis. ~~kill me~~
+
+24.4.24
+Ordered new filament
+
+24.4.29
