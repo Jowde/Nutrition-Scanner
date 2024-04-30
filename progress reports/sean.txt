@@ -27,3 +27,6 @@ of the text analysis. ~~kill me~~
 Ordered new filament
 
 24.4.29
+Attempted to assemble scale using Arduino, and started working towards
+sending info from the adruino to the potato. Keyword "attempted"; it did
+not go well at all.
