@@ -25,6 +25,8 @@ class Food:
     def __init__(self,food_name:str,calories:int=0,fat:int=0,protein:int=0,carbs:int=0,sugars:int=0,fiber:int=0,
                  added_sugars:int=0,saturated_fat:int=0,unsaturated_fat:int=0,serving_size:float=0,
                  serving_size_unit:str=None) -> None:
+        self.food_name=food_name
+        
         self.calories=calories
         self.fat=fat
         self.protein=protein
@@ -36,7 +38,7 @@ class Food:
         self.unsaturated_fat=unsaturated_fat
         self.serving_size=serving_size
         self.serving_size_unit=serving_size_unit
-        self.food_name=food_name
+        
     
     @property
     def calories(self):
@@ -155,12 +157,26 @@ class Food:
     def food_name(self, value:str):
         self._food_name = value
     
+    def convert_to_dict(self):
+        return {'calories':self.calories, 
+                'fat':self.fat, 
+                'protein':self.protein, 
+                'carbs':self.carbs, 
+                'sugars':self.sugars,
+                'fiber':self.fiber, 
+                'added_sugar':self.added_sugars, 
+                'saturated_fat':self.saturated_fat, 
+                'unsaturated_fat':self.unsaturated_fat,
+                'serving_size':self.serving_size,
+                'serving_size_unit':self.serving_size_unit}
+    
     
     def __str__(self):
         # includes major macros [calories,fat,protein,carbs,sugars,fiber]
         ret = f"food item: {self.food_name}, {self.calories} cal, {self.fat}g fat,\n"
         ret+= f"{self.protein}g protein, {self.carbs}g carbs, {self.sugars}g sugars, {self.fiber}g fiber"
         return ret
-
-apple = Food()
-print(apple)
+    
+if __name__ == '__name__':
+    apple = Food()
+    print(apple)
