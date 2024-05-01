@@ -30,3 +30,7 @@ Ordered new filament
 Attempted to assemble scale using Arduino, and started working towards
 sending info from the adruino to the potato. Keyword "attempted"; it did
 not go well at all.
+
+The scale circuit was constructed at this time.
+
+24.5.1
