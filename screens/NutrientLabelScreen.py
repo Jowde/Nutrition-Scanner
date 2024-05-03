@@ -9,4 +9,4 @@ class NutrientLabel(gui_compenonts.Screen):
         self.main_menu = gui_compenonts.Menu(self.display, relative_size=(.4, .8), bg_color=pygame.Color(125,125,125))
         
     def run(self, pos, click):
-        print(NutrientLabel)
+        pass

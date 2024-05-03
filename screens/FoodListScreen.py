@@ -55,7 +55,7 @@ class FoodListScreen(gui_compenonts.Screen):
             
             on_press_func = lambda: self.switch_to_nutrient_label(len(self.nutrient_screens) - 1)
             
-            gui_compenonts.Button(self.food_scroll_menus[-1], text =f'{food}', relative_padding=(.3, .3), bg_color=pygame.Color(125,125,200), on_press=on_press_func, hover_highlight=1)
+            gui_compenonts.Button(self.food_scroll_menus[-1], text =f'{food}', relative_padding=(.3, .3), bg_color=pygame.Color(125,125,200), on_press=on_press_func, hover_highlight=1.25)
             
             index+=1
             
@@ -69,7 +69,7 @@ class FoodListScreen(gui_compenonts.Screen):
             
     def switch_to_nutrient_label(self, index):
         self.GameStateManager.index = index
-        self.GameStateManager.current_screen = 'nutrient_screens'
+        self.GameStateManager.current_state = 'nutrient_screens'
           
     def switch_to_main(self):
         self.GameStateManager.current_state = 'main_screen'
