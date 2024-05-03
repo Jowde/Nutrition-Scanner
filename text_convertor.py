@@ -3,6 +3,13 @@ from food import Food
 MACRO_LIST = ['serving size', 'calories','total fat', 'saturated fat', 'unsaturated fat', 'total carbohydrate',  'dietary fiber','total sugars', 'added sugars', 'protein']
 
 class TextConvertor:
+    '''
+    Converts text given by camera and slowly turns the data into a food item
+    
+    text parser - recieves a input text( text reciieved from camera), dtermines if its realistic anf places it into a macro list
+    
+    create_food_item - generates a food items based off macros collected off images.
+    '''
     def __init__(self, food_name: str, debug: bool = False):
         self.food_name = food_name
         self.macro_list = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]

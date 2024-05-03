@@ -1,5 +1,12 @@
 from food import Food
 class InfoHandler:
+    '''
+    Handles saving from and retireving from csv file
+    
+    loadfromfile creates the self.food_dict variable with all the data from the csv file
+    
+    savetofile saves any changes to food_dict and places it in the csv file
+    '''
     def __init__(self, file_path: str):
         self.file_path = file_path
         self.food_dict = {}
