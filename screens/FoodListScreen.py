@@ -58,16 +58,26 @@ class FoodListScreen(gui_compenonts.Screen):
             if index == 3:
                 self.food_scroll_menus.append(gui_compenonts.Menu(self.display, relative_size=(.7, .7), bg_color=MENU_COLOR, layout='vertical'))
                 index = 0
-            gui_compenonts.Button(self.food_scroll_menus[-1], text =f'{food}',relative_padding=(.3, .3), bg_color=BUTTON_COLOR1, on_press=lambda: True, hover_highlight=1)
-            self.nutrient_screens.append(NutrientLabel(self.display, self.GameStateManager, ))
+            self.nutrient_screens.append(NutrientLabel(self.display, self.GameStateManager, self.info_handler.food_from_dict(food)))
+            
+            on_press_func = lambda: self.switch_to_nutrient_label(len(self.nutrient_screens) - 1)
+            
+            gui_compenonts.Button(self.food_scroll_menus[-1], text =f'{food}', relative_padding=(.3, .3), bg_color=pygame.Color(125,125,200), on_press=on_press_func, hover_highlight=1)
+            
             index+=1
+            
+            
         while index <3:
             gui_compenonts.Button(self.food_scroll_menus[-1],relative_padding=(.3, .3), bg_color=BUTTON_COLOR2, on_press=lambda: True, hover_highlight=1)
             index+=1
+            
         for menu in self.food_scroll_menus:
             menu.init_widgets()
-
-                
+            
+    def switch_to_nutrient_label(self, index):
+        self.GameStateManager.index = index
+        self.GameStateManager.current_screen = 'nutrient_screens'
+          
     def switch_to_main(self):
         self.GameStateManager.current_state = 'main_screen'
         

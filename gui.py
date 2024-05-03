@@ -16,7 +16,7 @@ class GUI:
         self.GSM = gui_compenonts.GameStateManager('main_screen')
         self.MainScreen = screens.MainScreen(self.display, self.GSM)
         self.FoodListScreen = screens.FoodListScreen(self.display, self.GSM)
-        self.screens = {'main_screen': self.MainScreen, 'foodlist_screen': self.FoodListScreen}
+        self.screens = {'main_screen': self.MainScreen, 'foodlist_screen': self.FoodListScreen, 'nutrient_screens': self.FoodListScreen.nutrient_screens}
         
         
         self.running = True
@@ -28,9 +28,14 @@ class GUI:
             for event in events:
                 if event.type == pygame.QUIT:
                     self.running = False
+
             pos = pygame.mouse.get_pos()
             click = pygame.mouse.get_pressed()[0]
-            self.screens[self.GSM.current_state].run(pos, click)
+            print(f'{self.GSM.current_state}')
+            if self.GSM.current_state != 'nutrient_screens':
+                self.screens[self.GSM.current_state].run(pos, click)
+            else:
+                self.screens['nutrient_screens'][self.GSM.screens_index].run(pos, click)
             
             pygame.display.update()
         
