@@ -2,7 +2,7 @@ from pygame import Vector2, Surface, transform, Color
 from pygame.sprite import Sprite, Group
 from gui_compenonts.label import Label
 from gui_compenonts.button import Button
-
+from gui_compenonts.text_input import TextInput
 class Menu(Sprite):
     def __init__(self, display: Surface, relative_size: tuple[float,float] = (1,1), position: str = 'center', 
                  bg_color: Color = Color(255,255,255), bg_image: Surface = None, layout: str = 'horizontal'):
@@ -83,6 +83,15 @@ class Menu(Sprite):
             if isinstance(widget, Button):
                 if widget.is_hovered_over(pos) and click:
                     widget.pressed()
+            if isinstance(widget, TextInput):
+                if widget.is_hovered_over and click:
+                    widget.change_selected_to_true()
+                elif click:
+                    widget.chane_selected_to_false()
+                widget.input_handler()
+                
+                    
+                
             widget.update()
             self.image.blit(widget.image, widget.position)
         self.display.blit(source = self.image, dest=self.rect)

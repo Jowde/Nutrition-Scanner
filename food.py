@@ -145,6 +145,7 @@ class Food:
     def food_name(self, value:str):
         self._food_name = value
     
+    
     def return_dict(self):
         '''
         returns dictionary of items for the info handler 
@@ -158,13 +159,8 @@ class Food:
                 'added_sugar':self.added_sugars, 
                 'saturated_fat':self.saturated_fat, 
                 'unsaturated_fat':self.unsaturated_fat,
-                'serving_size':self.serving_size,
-                'serving_size_unit':self.serving_size_unit}
+                'serving_size':self.serving_size}
             
-   
-        
-
-
     def __str__(self):
         # includes major macros [calories,fat,protein,carbs,sugars,fiber]
         ret = f"food item: {self.food_name}, {self.calories} cal, {self.fat}g fat,\n"
