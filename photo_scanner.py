@@ -2,6 +2,7 @@ import cv2
 import pytesseract
 import PIL.Image
 import os
+from text_convertor import TextConvertor
 
 #Uncomment to add image capture
 #cam = cv2.VideoCapture(0)
@@ -54,15 +55,23 @@ my_config = r"--psm 4 --oem 3"
 
 """
 #Testing certain images, change # 'opencv_frame_#' to access different images
-text1 = pytesseract.image_to_string(PIL.Image.open(os.path.join("images", "opencv_frame_1.png")), config=my_config)
-text2 = pytesseract.image_to_string(PIL.Image.open(os.path.join("images", "opencv_frame_6.png")), config=my_config)
-text3 = pytesseract.image_to_string(PIL.Image.open(os.path.join("images", "opencv_frame_10.png")), config=my_config)
-print("Jambalaya")
-print(text1)
-print("Hot Chocolate")
-print(text2)
-print("Protein Powder")
-print(text3)
+if __name__ == '__main__':
+    text1 = pytesseract.image_to_string(PIL.Image.open(os.path.join("images", "opencv_frame_1.png")), config=my_config)
+    text2 = pytesseract.image_to_string(PIL.Image.open(os.path.join("images", "opencv_frame_6.png")), config=my_config)
+    text3 = pytesseract.image_to_string(PIL.Image.open(os.path.join("images", "opencv_frame_10.png")), config=my_config)
+
+    print("Jambalaya")
+    food_item = TextConvertor('Jambalaya', debug = True)
+    food_item.text_parser(text1)
+    print(food_item.create_food_item())
+
+    '''
+    print("Hot Chocolate")
+    text_parser(text2)
+
+    print("Protein Powder")
+    text_parser(text3)
+    '''
 
 #uncomment when uncommenting picture taking
 #cam.release()
