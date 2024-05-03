@@ -24,18 +24,18 @@ class Food:
 
     def __init__(self, food_name:str, serving_size:float=0, calories:int=0, fat: int=0, saturated_fat:int=0,unsaturated_fat:int=0,carbs:int=0,fiber:int=0, sugars:int=0,
                  added_sugars:int=0, protein:int=0) -> None:
-        self.food_name=food_name
+        self.food_name= str(food_name)
         
-        self.serving_size=serving_size
-        self.calories=calories
-        self.carbs=carbs
-        self.fat=fat
-        self.saturated_fat=saturated_fat
-        self.unsaturated_fat=unsaturated_fat
-        self.fiber=fiber
-        self.sugars=sugars
-        self.added_sugars=added_sugars
-        self.protein=protein
+        self.serving_size= int(serving_size)
+        self.calories=int(calories)
+        self.carbs=int(carbs)
+        self.fat=int(fat)
+        self.saturated_fat=int(saturated_fat)
+        self.unsaturated_fat=int(unsaturated_fat)
+        self.fiber=int(fiber)
+        self.sugars=int(sugars)
+        self.added_sugars=int(added_sugars)
+        self.protein=int(protein)
         
         
     @property

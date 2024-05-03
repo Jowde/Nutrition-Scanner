@@ -43,10 +43,18 @@ class InfoHandler:
             
     
     def food_from_dict(self, name:str):
-        try:
-            return Food(self.food_dict[name], self.food_dict[name]['serving_size'])
-        except:
-            return False
+            return Food(food_name= name, 
+                        serving_size=self.food_dict[name]['serving_size'], 
+                        calories=self.food_dict[name]['calories'], 
+                        fat=self.food_dict[name]['fat'], 
+                        saturated_fat=self.food_dict[name]['saturated_fat'], 
+                        unsaturated_fat=self.food_dict[name]['unsaturated_fat'],
+                        carbs=self.food_dict[name]['carbs'],
+                        fiber=self.food_dict[name]['fiber'],
+                        sugars=self.food_dict[name]['sugars'],
+                        added_sugars=self.food_dict[name]['added_sugars'],
+                        protein=self.food_dict[name]['protein'])
+
 
 if __name__ =='__main__':       
     foodinfo = InfoHandler('foods.csv')

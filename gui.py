@@ -31,7 +31,6 @@ class GUI:
 
             pos = pygame.mouse.get_pos()
             click = pygame.mouse.get_pressed()[0]
-            print(f'{self.GSM.current_state}')
             if self.GSM.current_state != 'nutrient_screens':
                 self.screens[self.GSM.current_state].run(pos, click)
             else:

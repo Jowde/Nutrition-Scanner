@@ -58,6 +58,8 @@ class FoodListScreen(gui_compenonts.Screen):
             if index == 3:
                 self.food_scroll_menus.append(gui_compenonts.Menu(self.display, relative_size=(.7, .7), bg_color=MENU_COLOR, layout='vertical'))
                 index = 0
+            print(self.info_handler.food_from_dict(food))
+            print(food)
             self.nutrient_screens.append(NutrientLabel(self.display, self.GameStateManager, self.info_handler.food_from_dict(food)))
             
             on_press_func = lambda: self.switch_to_nutrient_label(len(self.nutrient_screens) - 1)

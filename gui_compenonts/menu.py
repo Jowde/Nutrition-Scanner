@@ -73,7 +73,10 @@ class Menu(Sprite):
     
     def init_widgets(self):
         for index, widget in enumerate(self.widget_group):
-            widget.init_image(index, len(self.widget_group), self.layout)
+            if isinstance(widget, Menu):
+                widget.init_widgets()
+            else:
+                widget.init_image(index, len(self.widget_group), self.layout)
             
     def clear(self):
         self.image.fill(self.bg_color)
@@ -89,9 +92,15 @@ class Menu(Sprite):
                 elif click:
                     widget.chane_selected_to_false()
                 widget.input_handler()
-                
-                    
-                
             widget.update()
             self.image.blit(widget.image, widget.position)
         self.display.blit(source = self.image, dest=self.rect)
+    
+    def blit(self, source, dest):
+        self.image.blit(source=source, dest=dest)
+        
+    def get_width(self):
+        return self.size.x
+    
+    def get_height(self):
+        return self.size.y
