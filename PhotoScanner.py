@@ -57,12 +57,63 @@ my_config = r"--psm 4 --oem 3"
 text1 = pytesseract.image_to_string(PIL.Image.open(os.path.join("images", "opencv_frame_1.png")), config=my_config)
 text2 = pytesseract.image_to_string(PIL.Image.open(os.path.join("images", "opencv_frame_6.png")), config=my_config)
 text3 = pytesseract.image_to_string(PIL.Image.open(os.path.join("images", "opencv_frame_10.png")), config=my_config)
+
+MACRO_LIST = ['serving size', 'calories','total fat', 'saturated fat', 'unsaturated fat', 'total carbohydrate',  'dietary fiber','total sugars', 'added sugars', 'protein']
+
+def text_parser(string: str) -> list[int]:
+    '''
+    parses text created by camera and extracts macro values from it
+    '''
+    text = string.lower()
+    text = text.replace('\n',' ')
+    text = ''.join(letter for letter in text if letter.isalnum() or letter == ' ')
+    macro_grams_list = []
+    for macro in MACRO_LIST:
+        grams = grams_per_macro_finder(text, macro)
+        macro_grams_list.append(grams)
+        print(f'{macro}: {grams}')
+    return macro_grams_list
+        
+        
+def grams_per_macro_finder(text: str, macro: str) -> int:
+    '''
+    checks if an amount in grams can be extract from the photo text 
+    If not returns 0 
+    '''
+    index = text.find(macro)
+    spaced_parse = False
+    grams = ''
+    if index >=0:
+        index = index + len(macro)
+        while True:
+            if text[index].isdigit():
+                grams += text[index]
+                
+            elif not spaced_parse:
+                spaced_parse = True
+                
+            else:
+                
+                break
+            index+=1
+            
+        if grams =='':
+            grams = 0
+        
+        return int(grams) 
+    return 0
+            
+    
+    
 print("Jambalaya")
-print(text1)
+text_parser(text1)
+
+
 print("Hot Chocolate")
-print(text2)
+text_parser(text2)
+
 print("Protein Powder")
-print(text3)
+text_parser(text3)
 
 #uncomment when uncommenting picture taking
 #cam.release()

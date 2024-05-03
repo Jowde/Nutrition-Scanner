@@ -23,21 +23,24 @@ class Food:
                            "quart","gallon","pound","gram","kilogram","liter","milliliter"]
 
     def __init__(self,food_name:str,calories:int=0,fat:int=0,protein:int=0,carbs:int=0,sugars:int=0,fiber:int=0,
-                 added_sugars:int=0,saturated_fat:int=0,unsaturated_fat:int=0,serving_size:float=0,
-                 serving_size_unit:str=None) -> None:
+                 added_sugars:int=0,saturated_fat:int=0,unsaturated_fat:int=0,serving_size:float=0) -> None:
         self.food_name=food_name
         
+        self.serving_size=serving_size
         self.calories=calories
-        self.fat=fat
-        self.protein=protein
         self.carbs=carbs
-        self.sugars=sugars
-        self.fiber=fiber
-        self.added_sugars=added_sugars
+        self.fat=fat
         self.saturated_fat=saturated_fat
         self.unsaturated_fat=unsaturated_fat
-        self.serving_size=serving_size
-        self.serving_size_unit=serving_size_unit
+        self.fiber=fiber
+        self.sugars=sugars
+        self.added_sugars=added_sugars
+        self.protein=protein
+        
+        
+        
+        
+        
         
     
     @property
@@ -139,16 +142,6 @@ class Food:
             self._serving_size = value
         else:
             self._serving_size = 0
-    
-    @property
-    def serving_size_unit(self):
-        return self._serving_size_unit
-    @serving_size_unit.setter
-    def serving_size_unit(self, value:str):
-        if value in self.valid_serving_units:
-            self._serving_size_unit = value
-        else:
-            self._serving_size_unit=None
 
     @property
     def food_name(self):
@@ -157,8 +150,11 @@ class Food:
     def food_name(self, value:str):
         self._food_name = value
     
-    def convert_to_dict(self):
-        return {'calories':self.calories, 
+    def return_dict(self):
+        '''
+        returns dictionary of items for the info handler 
+        '''
+        return  {'calories':self.calories, 
                 'fat':self.fat, 
                 'protein':self.protein, 
                 'carbs':self.carbs, 
@@ -169,8 +165,46 @@ class Food:
                 'unsaturated_fat':self.unsaturated_fat,
                 'serving_size':self.serving_size,
                 'serving_size_unit':self.serving_size_unit}
+            
+   
+        
+    def list_to_variables(self, macro_list: list[int]):
+        '''
+        Takes a list and sets the variables of class to them if they are greater than 0 and less than the previous value
+        the variables should in the order serving size, calories, fat, saturated fat, unsaturated fat, carbs, fiber, sugar, added sugar, protein  
+        '''
+        
+        if macro_list[0] > 0 and macro_list[0] <= self.serving_size:
+            self.serving_size = macro_list[0]
     
-    
+        if macro_list[1] > 0 and macro_list[1] <= self.calories:
+            self.calories = macro_list[1]
+        
+        if macro_list[2] > 0 and macro_list[2] <= self.fat:
+            self.fat = macro_list[2]
+            
+        if macro_list[3] > 0 and macro_list[3] <= self.saturated_fat:
+            self.saturated_fat = macro_list[3]
+            
+        if macro_list[4] > 0 and macro_list[4] <= self.unsaturated_fat:
+            self.unsaturated_fat = macro_list[4]
+            
+        if macro_list[5] > 0 and macro_list[5] <= self.carbs:
+            self.carbs = macro_list[5]
+        
+       
+        if macro_list[6] > 0 and macro_list[6] <= self.fiber:
+            self.fiber = macro_list[6]
+            
+        if macro_list[7] > 0 and macro_list[7] <= self.sugars:
+            self.sugars = macro_list[7]
+            
+        if macro_list[8] > 0 and macro_list[8] <= self.added_sugars:
+            self.added_sugars = macro_list[8]
+            
+        if macro_list[9] > 0 and macro_list[9] <= self.protein:
+            self.protein = macro_list[9]
+
     def __str__(self):
         # includes major macros [calories,fat,protein,carbs,sugars,fiber]
         ret = f"food item: {self.food_name}, {self.calories} cal, {self.fat}g fat,\n"
