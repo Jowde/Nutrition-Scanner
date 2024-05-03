@@ -32,15 +32,23 @@ class InfoHandler:
                                             'serving_size':foodinfo[9],
                                             'serving_size_unit': foodinfo[10]}
         foods.close()
+
+    def add_item(self, food: Food):
+        self.food_dict[food.food_name] = food.convert_to_dict()
             
-            
-    
+    def remove_item(self, foodName):
+        del self.food_dict[foodName.food_name]
     
 
 if __name__ =='__main__':       
     foodinfo = InfoHandler('foods.csv')
     apple = Food(food_name='apple', calories=100, protein = 10, fat = 10, carbs =102)
+    burger = Food(food_name='burger', calories=120, protein=26, carbs= 20)
     
-    foodinfo.food_dict[apple.food_name] = apple.convert_to_dict()
-    
+    foodinfo.add_item(burger)
+    for item in foodinfo.food_dict:
+        print(foodinfo.food_dict[item])
+    foodinfo.remove_item(burger)
+    for item in foodinfo.food_dict:
+        print(foodinfo.food_dict[item])
     foodinfo.savetofile()
