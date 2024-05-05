@@ -1,6 +1,7 @@
 class GameStateManager:
     def __init__(self, inital_state: str):
         self.current_state = inital_state
+        self.screens_index = 0
         
     @property
     def current_state(self) -> str:
