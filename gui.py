@@ -4,6 +4,7 @@ from info_handler import InfoHandler
 import gui_compenonts.game_state_manager
 import gui_compenonts.screen 
 import screens
+import screens.AddItemScreen
 POTATO_SCREEN_SIZE = (1024, 600)
 
 class GUI:
@@ -16,7 +17,8 @@ class GUI:
         self.GSM = gui_compenonts.GameStateManager('main_screen')
         self.MainScreen = screens.MainScreen(self.display, self.GSM)
         self.FoodListScreen = screens.FoodListScreen(self.display, self.GSM)
-        self.screens = {'main_screen': self.MainScreen, 'foodlist_screen': self.FoodListScreen, 'nutrient_screens': self.FoodListScreen.nutrient_screens}
+        self.AddItemScreen = screens.AddItemScreen(self.display, self.GSM)
+        self.screens = {'main_screen': self.MainScreen, 'foodlist_screen': self.FoodListScreen, 'nutrient_screens': self.FoodListScreen.nutrient_screens, 'add_item_screen': self.AddItemScreen}
         
         
         self.running = True
