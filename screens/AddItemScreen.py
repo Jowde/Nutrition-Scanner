@@ -9,7 +9,7 @@ MENU_COLOR = pygame.Color(125,125,125)
 BUTTON_COLOR = pygame.Color(125,125,200)
 FONT_SIZE = 22
 
-class AddItem(gui_compenonts.Screen):
+class AddItemScreen(gui_compenonts.Screen):
     def __init__(self, display, GameStateManager: "gui_compenonts.GameStateManager", bg_color: pygame.Color = BACKGROUND_COLOR):
         super().__init__(display, GameStateManager, bg_color)
 
@@ -20,5 +20,6 @@ class AddItem(gui_compenonts.Screen):
         self.addButton = gui_compenonts.Button(self.main_menu, relative_padding=(.4, .4), text="Use Photo Scanner", on_press=photo_scanner.startPhotoWindow())
 
         #Add manually - takes you to screen where you can manually add items
-
+    def run(self, pos:tuple[int,int], click: bool):
+        self.main_menu.draw(pos, click)
 
