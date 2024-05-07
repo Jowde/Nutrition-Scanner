@@ -28,7 +28,7 @@ class FoodListScreen(gui_compenonts.Screen):
         self.info_handler.loadfromfile()
         
         self.food_scroll_menus = []
-        self.init_menus()
+        
         self.food_scroll_index = 0
         
         self.next_menu = gui_compenonts.Menu(self.display, relative_size=(.2, .2), position='bottomright')
@@ -43,6 +43,8 @@ class FoodListScreen(gui_compenonts.Screen):
         self.add_item = gui_compenonts.Button(self.addremove_menu, relative_padding=(.6, .7), text='Add Item', bg_color=BUTTON_COLOR1, text_size=FONT_SIZE, on_press=self.switch_to_addItem)
         self.remove_item = gui_compenonts.Button(self.addremove_menu, relative_padding=(.6, .7), text="Remove Item", bg_color=BUTTON_COLOR1, text_size=FONT_SIZE, on_press=self.remove_item)
         self.addremove_menu.init_widgets()
+
+        self.init_menus()
 
         
 
@@ -93,6 +95,9 @@ class FoodListScreen(gui_compenonts.Screen):
         foodName = input("What food item do you want to remove")
         foodItem = self.info_handler.food_from_dict(foodName)
         self.info_handler.remove_item(foodItem)
+        
+        self.food_scroll_menus.remove(self.food_scroll_menus[0])
+        self.food_scroll_menus.remove(self.food_scroll_menus[len(self.food_scroll_menus) -1 ])
         self.init_menus()
 
     def switch_to_addItem(self):
