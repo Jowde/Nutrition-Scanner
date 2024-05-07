@@ -39,11 +39,12 @@ class FoodListScreen(gui_compenonts.Screen):
         self.previous_button = gui_compenonts.Button(self.previous_menu, relative_padding=(.6,.7), bg_color=BUTTON_COLOR1, on_press=self.decrease_index, text='Previous', text_size=FONT_SIZE)
         self.previous_menu.init_widgets()
 
-        self.addremove_menu = gui_compenonts.Menu(self.display, relative_size=(.2, .2), position='topright')
+        self.addremove_menu = gui_compenonts.Menu(self.display, relative_size=(.2, .2), position='topright', layout='vertical')
         self.add_item = gui_compenonts.Button(self.addremove_menu, relative_padding=(.6, .7), text='Add Item', bg_color=BUTTON_COLOR1, text_size=FONT_SIZE, on_press=self.switch_to_addItem)
+        self.remove_item = gui_compenonts.Button(self.addremove_menu, relative_padding=(.6, .7), text="Remove Item", bg_color=BUTTON_COLOR1, text_size=FONT_SIZE, on_press=self.remove_item)
         self.addremove_menu.init_widgets()
 
-        #self.remove_item = gui_compenonts.Button(self.addremove_menu, relative_padding=(.2, .2) on_press=self.)
+        
 
     
 
@@ -63,6 +64,9 @@ class FoodListScreen(gui_compenonts.Screen):
             
     def init_menus(self):
         index = 3
+        self.info_handler.savetofile()
+        self.info_handler.loadfromfile()
+        self.nutrient_screens = []
         for food in self.info_handler.food_dict:
             if index == 3:
                 self.food_scroll_menus.append(gui_compenonts.Menu(self.display, relative_size=(.7, .7), bg_color=MENU_COLOR, layout='vertical'))
@@ -84,7 +88,13 @@ class FoodListScreen(gui_compenonts.Screen):
             
         for menu in self.food_scroll_menus:
             menu.init_widgets()
-            
+    
+    def remove_item(self):
+        foodName = input("What food item do you want to remove")
+        foodItem = self.info_handler.food_from_dict(foodName)
+        self.info_handler.remove_item(foodItem)
+        self.init_menus()
+
     def switch_to_addItem(self):
         self.GameStateManager.current_state = 'add_item_screen'
 
