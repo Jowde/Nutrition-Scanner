@@ -34,3 +34,14 @@ not go well at all.
 The scale circuit was constructed at this time.
 
 24.5.1
+Scale circuit edited
+
+24.5.4
+Restructured potato and scale to work with potato instead of Arduino;
+meant to bypass the linking of Arduino and potato.
+
+24.5.6
+Began physical construction of the scale box using
+cardboard and plywood; begun RPi into Potato integration
+
+24.5.7
