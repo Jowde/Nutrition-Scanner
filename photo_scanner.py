@@ -5,55 +5,65 @@ import os
 from text_convertor import TextConvertor
 import info_handler
 
-#Uncomment to add image capture
-cam = cv2.VideoCapture(0)
 
-#Uncomment to make the window appear
-#cv2.namedWindow("Python Webcam")
-
-img_counter = 0
-
-#set psm to 1, 3, or 4 for text that will be in a block format
-#set psm to 11 or 12 to get single text line by line
-#Dont touch oem 
-my_config = r"--psm 4 --oem 3"
+class PhotoScanner():
+    def __init__(self) -> None:
+        self.img_counter = 0 
+        self.startWindow = False
+        self.my_config = r"--psm 4 --oem 3"
+    
+    def setStartWindow(self):
+        self.startWindow = True
 
 
 #Code below is for taking pictures and scanning
-def startPhotoWindow(foodName):
-    while True:
-        #reads camera frame
-        ret, frame = cam.read()
+    def startPhotoWindow(self, foodName):
+        cam = cv2.VideoCapture(0)
 
-        #Checks if frame is readable
-        if not ret:
-            print('failed to grab frame')
-            break
-        cv2.imshow('test', frame)
+        while self.startWindow:
+            #reads camera frame
+            ret, frame = cam.read()
 
-        #Gets key press
-        k = cv2.waitKey(1)
+            #Checks if frame is readable
+            if not ret:
+                print('failed to grab frame')
+                break
+            
+            cv2.imshow('test', frame)
 
-        #if Key press is escape
-        if k % 256 == 27:
-            print("Escape hit")
-            break
-        #if key press is space
-        elif k % 256 == 32:
-            #prob need to change the way files are saved so they dont overwrite each other when program is closed and ran again 
-            img_name = os.path.join("images", f"opencv_frame_{img_counter}.png")
+            #Gets key press
+            k = cv2.waitKey(1)
 
-            #saves image to images folder
-            cv2.imwrite(img_name, frame)
+            #if Key press is escape
+            if k % 256 == 27:
+                print("Escape hit")
+                break
+            #if key press is space
+            elif k % 256 == 32:
+                #prob need to change the way files are saved so they dont overwrite each other when program is closed and ran again 
+                img_name = os.path.join("images", f"opencv_frame_{self.img_counter}.png")
 
-            #prints most recently taken screen shot
-            text = pytesseract.image_to_string(PIL.Image.open(img_name), config=my_config)
-            food_item = TextConvertor(foodName)
-            food_item.text_parser(text)
-            info_handler.add_item(food_item.create_food_item())
+                #saves image to images folder
+                cv2.imwrite(img_name, frame)
 
-            #sets up for next screenshot
-            img_counter += 1
+                #prints most recently taken screen shot
+                text = pytesseract.image_to_string(PIL.Image.open(img_name), config=self.my_config)
+                food_item = TextConvertor(foodName)
+                food_item.text_parser(text)
+                info_handler.add_item(food_item.create_food_item())
+
+                #sets up for next screenshot
+                self.img_counter += 1
+
+        cam.release()
+        #cam.destroyAllWindows()
+
+
+
+
+
+
+
 
 
 #Testing certain images, change # 'opencv_frame_#' to access different images
@@ -77,5 +87,3 @@ def startPhotoWindow(foodName):
     '''
 """
 #uncomment when uncommenting picture taking
-cam.release()
-#cam.destroyAllWindows()

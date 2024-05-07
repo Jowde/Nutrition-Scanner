@@ -42,7 +42,8 @@ class Menu(Sprite):
             self.rect.centerx = self.display.get_width()//2
         
         elif self.position == 'topright':
-            self.rect.topright = (0, self.display.get_height())
+            self.rect.right = self.display.get_width()
+            self.rect.top = 0
         
         elif self.position == 'centerleft':
             self.rect.left = 0
@@ -68,6 +69,9 @@ class Menu(Sprite):
             self.rect.right = self.display.get_width()
             self.rect.bottom = self.display.get_height()
         
+        else:
+            print(f'invalid position for {self}')
+    
     def add_widget(self, widget):
         self.widget_group.add(widget)
     

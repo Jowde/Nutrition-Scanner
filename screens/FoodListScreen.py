@@ -39,14 +39,13 @@ class FoodListScreen(gui_compenonts.Screen):
         self.previous_button = gui_compenonts.Button(self.previous_menu, relative_padding=(.6,.7), bg_color=BUTTON_COLOR1, on_press=self.decrease_index, text='Previous', text_size=FONT_SIZE)
         self.previous_menu.init_widgets()
 
-        self.addremove_menu = gui_compenonts.Menu(self.display, relative_size=(.4, .4), position="topright")
-        self.add_item = gui_compenonts.Button(self.addremove_menu, relative_padding=(.2, .2), on_press=self.switch_to_addItem)
+        self.addremove_menu = gui_compenonts.Menu(self.display, relative_size=(.2, .2), position='topright')
+        self.add_item = gui_compenonts.Button(self.addremove_menu, relative_padding=(.6, .7), text='Add Item', bg_color=BUTTON_COLOR1, text_size=FONT_SIZE, on_press=self.switch_to_addItem)
         self.addremove_menu.init_widgets()
+
         #self.remove_item = gui_compenonts.Button(self.addremove_menu, relative_padding=(.2, .2) on_press=self.)
 
-    def switch_to_addItem(self, index):
-        self.GameStateManager.index = index
-        self.GameStateManager.current_state = 'add_item_screen'
+    
 
     def increase_index(self):
         if self.food_scroll_index < len(self.food_scroll_menus) - 1:
@@ -86,6 +85,9 @@ class FoodListScreen(gui_compenonts.Screen):
         for menu in self.food_scroll_menus:
             menu.init_widgets()
             
+    def switch_to_addItem(self):
+        self.GameStateManager.current_state = 'add_item_screen'
+
     def switch_to_nutrient_label(self, index):
         self.GameStateManager.index = index
         self.GameStateManager.current_state = 'nutrient_screens'
@@ -101,7 +103,9 @@ class FoodListScreen(gui_compenonts.Screen):
         self.title_menu.draw(pos, click)
         self.back_menu.draw(pos, click)
         self.food_scroll_menus[self.food_scroll_index].draw(pos, click)
-        
+        self.addremove_menu.draw(pos, click)
+
+
         if self.index_limit_upper:
             self.next_menu.draw(pos, click)
         else:
