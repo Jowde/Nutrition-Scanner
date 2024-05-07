@@ -17,7 +17,7 @@ class InfoHandler:
         for food in self.food_dict:
             current_food = self.food_dict[food]
             print(current_food['calories'])
-            foods.write(f"{food},{current_food['serving_size']},{current_food['calories']},{current_food['fat']},{current_food['saturated_fat']},{current_food['unsaturated_fat']},{current_food['carbs']},{current_food['fiber']},{current_food['sugars']},{current_food['added_sugar']},{current_food['protein']}")
+            foods.write(f"{food},{current_food['serving_size']},{current_food['calories']},{current_food['fat']},{current_food['saturated_fat']},{current_food['unsaturated_fat']},{current_food['carbs']},{current_food['fiber']},{current_food['sugars']},{current_food['added_sugars']},{current_food['protein']}")
         foods.close()
     
     def loadfromfile(self): # converts file to dict
@@ -25,7 +25,7 @@ class InfoHandler:
         foodslist = foods.readlines()
         for line in foodslist:
             
-            line.replace('','\n')
+            foodinfo = line.replace('\n','')
             foodinfo = line.split(',') # should probably add serving size in grams lol
             self.food_dict[foodinfo[0]] = { 'serving_size':foodinfo[1],
                                             'calories':foodinfo[2], 

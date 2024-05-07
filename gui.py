@@ -1,8 +1,7 @@
-import gui_compenonts 
+import gui_components 
 import pygame
-from info_handler import InfoHandler
-import gui_compenonts.game_state_manager
-import gui_compenonts.screen 
+import gui_components.game_state_manager
+import gui_components.screen 
 import screens
 POTATO_SCREEN_SIZE = (1024, 600)
 
@@ -13,7 +12,7 @@ class GUI:
         
         self.display = pygame.display.set_mode(POTATO_SCREEN_SIZE)
         
-        self.GSM = gui_compenonts.GameStateManager('main_screen')
+        self.GSM = gui_components.GameStateManager('main_screen')
         self.MainScreen = screens.MainScreen(self.display, self.GSM)
         self.FoodListScreen = screens.FoodListScreen(self.display, self.GSM)
         self.screens = {'main_screen': self.MainScreen, 'foodlist_screen': self.FoodListScreen, 'nutrient_screens': self.FoodListScreen.nutrient_screens}
@@ -35,7 +34,6 @@ class GUI:
                 self.screens[self.GSM.current_state].run(pos, click)
             else:
                 self.screens['nutrient_screens'][self.GSM.screens_index].run(pos, click)
-            
             pygame.display.update()
         
 

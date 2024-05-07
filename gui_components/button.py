@@ -1,10 +1,12 @@
-from pygame import Vector2, Surface, transform, font, Color, Rect
-from pygame.sprite import Sprite
+from pygame import Surface, Color, Vector2, font, transform, Rect, draw
 from pygame.font import Font
+from pygame.sprite import Sprite
 
-class Label(Sprite):
-    def __init__(self, menu: Surface, image: Surface = None, relative_size: tuple[float, float] = None, bg_color: Color = Color(0,0,0), relative_padding: tuple[float, float] = (0,0),
-                 text: str = '', text_font: Font = None, text_size: int = 32, text_color: Color = Color(0,0,0)):
+class Button(Sprite):
+    def __init__(self, menu: Surface, image: Surface = None, relative_size: tuple[float, float] = None, bg_color: Color = Color(255,255,255), relative_padding: tuple[int, int] = (0,0), 
+                 text: str = '', text_font: Font = None, text_size: int = 32, text_color: Color = Color(0,0,0), 
+                 hover_highlight: float = 1.125, on_press = None, border_width: int = 0, border_color: Color = Color(0,0,0)):
+        
         self.menu = menu
         self.bg_image = image
         self.relative_size = relative_size
@@ -20,6 +22,31 @@ class Label(Sprite):
         
         Sprite.__init__(self, self.menu.widget_group)
         
+        self.hover_highlight = hover_highlight
+        self.on_press = on_press
+        
+        self.border_width = border_width
+        self.border_color = border_color
+        
+        
+    def is_hovered_over(self, pos) -> bool:
+            if self.rect.collidepoint(pos):
+                self.image.fill(
+                        Color(  
+                            (self.bg_color.r * self.hover_highlight if self.bg_color.r * self.hover_highlight < 255 else 255,
+                            self.bg_color.g * self.hover_highlight if self.bg_color.g * self.hover_highlight < 255 else 255, 
+                            self.bg_color.b * self.hover_highlight if self.bg_color.b * self.hover_highlight < 255 else 255)
+                            )
+                        )
+                return True
+                
+            else:
+                self.image.fill(self.bg_color)
+                return False
+    
+    def pressed(self):
+        self.on_press()
+    
     def init_image(self, widget_index: int, total_widgets: int, layout: str):
         '''
         Initatizes image atrribute for the sprite using the info from menu 
@@ -66,9 +93,8 @@ class Label(Sprite):
         text_surface = self.text_font.render(self.text, True, self.text_color)
         self.image.blit(text_surface, text_surface.get_rect(center = (self.image.get_width()/2, 
                                                                       self.image.get_height()/2)))
-   
-       
-        
-        
+        if self.border_width > 0:
+            rect = self.image.get_rect(right = self.image.get_width(), bottom = self.image.get_height())
+            draw.rect(self.image, self.border_color, rect, self.border_width)
         
         

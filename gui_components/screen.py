@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from gui_compenonts.game_state_manager import GameStateManager
+from gui_components.game_state_manager import GameStateManager
 from pygame import Color
 
 class Screen(ABC):

@@ -1,8 +1,8 @@
 from pygame import Vector2, Surface, transform, Color
 from pygame.sprite import Sprite, Group
-from gui_compenonts.label import Label
-from gui_compenonts.button import Button
-from gui_compenonts.text_input import TextInput
+from gui_components.label import Label
+from gui_components.button import Button
+from gui_components.text_input import TextInput
 class Menu(Sprite):
     def __init__(self, display: Surface, relative_size: tuple[float,float] = (1,1), position: str = 'center', 
                  bg_color: Color = Color(255,255,255), bg_image: Surface = None, layout: str = 'horizontal'):
@@ -35,14 +35,16 @@ class Menu(Sprite):
     def init_position(self):
         
         if self.position == 'topleft':
-            self.rect.topleft = (0,0)
+            self.rect.top = 0
+            self.rect.left = 0
             
         elif self.position == 'topcenter':
             self.rect.top = 0
             self.rect.centerx = self.display.get_width()//2
         
         elif self.position == 'topright':
-            self.rect.topright = (0, self.display.get_height())
+            self.rect.right = self.display.get_width()
+            self.rect.top = 0
         
         elif self.position == 'centerleft':
             self.rect.left = 0
@@ -67,6 +69,8 @@ class Menu(Sprite):
         elif self.position == 'bottomright':
             self.rect.right = self.display.get_width()
             self.rect.bottom = self.display.get_height()
+        else:
+            print(f'invalid position for {self}')
         
     def add_widget(self, widget):
         self.widget_group.add(widget)
@@ -83,18 +87,14 @@ class Menu(Sprite):
         
     def draw(self, pos, click):
         for widget in self.widget_group:
-            if isinstance(widget, Button):
-                if widget.is_hovered_over(pos) and click:
-                    widget.pressed()
-            if isinstance(widget, TextInput):
-                if widget.is_hovered_over and click:
-                    widget.change_selected_to_true()
-                elif click:
-                    widget.chane_selected_to_false()
-                widget.input_handler()
+            
+            if widget.is_hovered_over(pos) and click:
+                widget.pressed()
+
             widget.update()
             self.image.blit(widget.image, widget.position)
         self.display.blit(source = self.image, dest=self.rect)
+        
     
     def blit(self, source, dest):
         self.image.blit(source=source, dest=dest)
