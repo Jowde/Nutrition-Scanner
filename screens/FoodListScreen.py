@@ -98,7 +98,7 @@ class FoodListScreen(gui_compenonts.Screen):
         
         self.food_scroll_menus.remove(self.food_scroll_menus[0])
         self.food_scroll_menus.remove(self.food_scroll_menus[len(self.food_scroll_menus) -1 ])
-        self.init_menus()
+        
 
     def switch_to_addItem(self):
         self.GameStateManager.current_state = 'add_item_screen'

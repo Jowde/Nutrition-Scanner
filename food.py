@@ -26,7 +26,7 @@ class Food:
                  added_sugars:int=0, protein:int=0) -> None:
         self.food_name= str(food_name)
         
-        self.serving_size= int(serving_size)
+        self.serving_size= float(serving_size)
         self.calories=int(calories)
         self.carbs=int(carbs)
         self.fat=int(fat)

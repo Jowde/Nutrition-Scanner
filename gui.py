@@ -18,7 +18,8 @@ class GUI:
         self.MainScreen = screens.MainScreen(self.display, self.GSM)
         self.FoodListScreen = screens.FoodListScreen(self.display, self.GSM)
         self.AddItemScreen = screens.AddItemScreen(self.display, self.GSM)
-        self.screens = {'main_screen': self.MainScreen, 'foodlist_screen': self.FoodListScreen, 'nutrient_screens': self.FoodListScreen.nutrient_screens, 'add_item_screen': self.AddItemScreen}
+        self.ChooseWeightScreen = screens.ChooseWeightScreen(self.display, self.GSM)
+        self.screens = {'main_screen': self.MainScreen, 'foodlist_screen': self.FoodListScreen, 'nutrient_screens': self.FoodListScreen.nutrient_screens, 'add_item_screen': self.AddItemScreen, 'choose_weight_screen': self.ChooseWeightScreen}
         
         
         self.running = True

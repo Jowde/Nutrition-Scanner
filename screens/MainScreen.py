@@ -14,11 +14,16 @@ class MainScreen(gui_compenonts.Screen):
         
         self.food_list_button = gui_compenonts.Button(self.main_menu, relative_padding=(.2, .2), text='Food List', bg_color=BUTTON_COLOR, on_press=self.switch_to_food_list, text_size=FONT_SIZE)
         self.setting_button = gui_compenonts.Button(self.main_menu, text = 'Setting', bg_color=BUTTON_COLOR, relative_padding=(.2, .2), text_size=FONT_SIZE)
-        
+        self.weight_portion = gui_compenonts.Button(self.main_menu, text="Choose Weight", bg_color=BUTTON_COLOR, relative_padding=(.2, .2), text_size=FONT_SIZE, on_press=self.switch_to_choose_weight)
+
+
         self.main_menu.init_widgets()
     
     def switch_to_food_list(self):
         self.GameStateManager.current_state = 'foodlist_screen'
+
+    def switch_to_choose_weight(self):
+        self.GameStateManager.current_state = 'choose_weight_screen'
 
     def run(self, pos: tuple[int,int], click: bool):
         self.display.fill(self.bg_color)
