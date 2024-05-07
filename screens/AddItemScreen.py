@@ -20,6 +20,6 @@ class AddItemScreen(gui_components.Screen):
         self.addButton = gui_components.Button(self.main_menu, relative_padding=(.4, .4), text="Use Photo Scanner", on_press=photo_scanner.startPhotoWindow())
 
         #Add manually - takes you to screen where you can manually add items
-    def run(self, pos:tuple[int,int], click: bool):
-        self.main_menu.draw(pos, click)
+    def run(self, pos:tuple[int,int], click: bool, pressed_keys: list):
+        self.main_menu.draw(pos, click, pressed_keys)
 

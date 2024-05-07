@@ -31,18 +31,21 @@ class Button(Sprite):
         
     def is_hovered_over(self, pos) -> bool:
             if self.rect.collidepoint(pos):
-                self.image.fill(
+                self.highlight()
+                return True
+                
+            else:
+                self.image.fill(self.bg_color)
+                return False
+            
+    def highlight(self):
+        self.image.fill(
                         Color(  
                             (self.bg_color.r * self.hover_highlight if self.bg_color.r * self.hover_highlight < 255 else 255,
                             self.bg_color.g * self.hover_highlight if self.bg_color.g * self.hover_highlight < 255 else 255, 
                             self.bg_color.b * self.hover_highlight if self.bg_color.b * self.hover_highlight < 255 else 255)
                             )
                         )
-                return True
-                
-            else:
-                self.image.fill(self.bg_color)
-                return False
     
     def pressed(self):
         self.on_press()
@@ -77,7 +80,13 @@ class Button(Sprite):
             self.image = Surface(self.size.xy)
             self.image.fill(self.bg_color)
         
-        self.rect = Rect(
+        try:
+            self.rect = Rect(
+                                (self.position.x + self.menu.rect.left + self.menu.display.rect.left, self.position.y + self.menu.rect.top + self.menu.display.rect.top),
+                                (self.size.x, self.size.y)
+                            )
+        except:
+            self.rect = Rect(
                             (self.position.x + self.menu.rect.left, self.position.y + self.menu.rect.top),
                             (self.size.x, self.size.y)
                         )
@@ -90,9 +99,10 @@ class Button(Sprite):
             
         
     def update(self):
-        text_surface = self.text_font.render(self.text, True, self.text_color)
-        self.image.blit(text_surface, text_surface.get_rect(center = (self.image.get_width()/2, 
-                                                                      self.image.get_height()/2)))
+        self.text_surface = self.text_font.render(self.text, True, self.text_color)
+        
+        self.image.blit(self.text_surface, self.text_surface.get_rect(center = (self.image.get_width()/2, self.image.get_height()/2)))
+        
         if self.border_width > 0:
             rect = self.image.get_rect(right = self.image.get_width(), bottom = self.image.get_height())
             draw.rect(self.image, self.border_color, rect, self.border_width)

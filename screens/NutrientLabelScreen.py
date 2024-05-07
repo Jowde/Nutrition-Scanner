@@ -32,7 +32,7 @@ class NutrientLabel(gui_components.Screen):
         self.added_sugarBtn = gui_components.Button(self.leftSideMenu, relative_padding=(.1, .1), text=f'Added Sugars', hover_highlight=1, on_press=lambda: True, bg_color=BUTTON_COLOR, text_size=FONT_SIZE)
         self.proteinBtn = gui_components.Button(self.leftSideMenu, relative_padding=(.1, .1), text="Protein", hover_highlight=1, on_press= lambda : True, bg_color=BUTTON_COLOR, text_size=FONT_SIZE)
 
-        self.servingSizeBtnVal = gui_components.Button(self.middleMenu, relative_padding=(.1, .1), text=f'{food_info.serving_size}g', hover_highlight=1, on_press=lambda: True, bg_color=BUTTON_COLOR, text_size=FONT_SIZE)
+        self.servingSizeBtnVal = gui_components.TextInput(self.middleMenu, relative_padding=(.1, .1), text=f'{food_info.serving_size}g', hover_highlight=1.125, bg_color=BUTTON_COLOR, text_size=FONT_SIZE)
         self.caloriesBtnVal = gui_components.Button(self.middleMenu, relative_padding=(.1, .1), text=f'{food_info.calories}', hover_highlight=1, on_press=lambda: True, bg_color=BUTTON_COLOR, text_size=FONT_SIZE)
         self.fatBtnVal = gui_components.Button(self.middleMenu, relative_padding=(.1, .1), text=f'{food_info.fat}g', hover_highlight=1, on_press=lambda: True, bg_color=BUTTON_COLOR, text_size=FONT_SIZE)
         self.saturated_fatBtnVal =gui_components.Button(self.middleMenu, relative_padding=(.1, .1), text=f'{food_info.saturated_fat}g', hover_highlight=1, on_press=lambda: True, bg_color=BUTTON_COLOR, text_size=FONT_SIZE)
@@ -66,18 +66,19 @@ class NutrientLabel(gui_components.Screen):
         self.main_menu.init_widgets()
         self.titleMenu.init_widgets()
         
-    def run(self, pos, click):
+    def run(self, pos:tuple[int,int], click: bool, pressed_keys: list):
         
         self.display.fill(self.bg_color)
-        self.main_menu.draw(pos, click)
+        self.main_menu.draw(pos, click, pressed_keys)
         
         # make menus that are in menus automatically draw- Jude (note to self) 
-        self.leftSideMenu.draw(pos,click)
-        self.middleMenu.draw(pos,click)
-        self.rightSideMenu.draw(pos, click)
+        self.leftSideMenu.draw(pos,click, pressed_keys)
+        self.middleMenu.draw(pos,click, pressed_keys)
+        self.rightSideMenu.draw(pos, click, pressed_keys)
         
-        self.back_menu.draw(pos, click)
-        self.titleMenu.draw(pos, click)
+        self.back_menu.draw(pos, click, pressed_keys)
+        self.titleMenu.draw(pos, click, pressed_keys)
+        
         
     def switch_to_food_list(self):
         self.GameStateManager.current_state = 'foodlist_screen'

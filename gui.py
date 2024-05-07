@@ -17,26 +17,26 @@ class GUI:
         self.FoodListScreen = screens.FoodListScreen(self.display, self.GSM)
         self.screens = {'main_screen': self.MainScreen, 'foodlist_screen': self.FoodListScreen, 'nutrient_screens': self.FoodListScreen.nutrient_screens}
         
-        
         self.running = True
         
-        
     def main_loop(self):
+        pressed_keys = []
         while self.running:
             events = pygame.event.get()
             for event in events:
                 if event.type == pygame.QUIT:
                     self.running = False
-
+                if event.type == pygame.KEYDOWN:
+                    pressed_keys.append(event)
             pos = pygame.mouse.get_pos()
             click = pygame.mouse.get_pressed()[0]
             if self.GSM.current_state != 'nutrient_screens':
-                self.screens[self.GSM.current_state].run(pos, click)
+                self.screens[self.GSM.current_state].run(pos, click, pressed_keys)
             else:
-                self.screens['nutrient_screens'][self.GSM.screens_index].run(pos, click)
+                self.screens['nutrient_screens'][self.GSM.screens_index].run(pos, click, pressed_keys)
+            pressed_keys = []
             pygame.display.update()
         
-
 if __name__ =='__main__':
     gui = GUI()
     gui.main_loop()

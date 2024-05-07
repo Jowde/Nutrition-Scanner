@@ -85,12 +85,22 @@ class Menu(Sprite):
     def clear(self):
         self.image.fill(self.bg_color)
         
-    def draw(self, pos, click):
+    def draw(self, pos: tuple[int, int], click: bool, pressed_keys: list):
         for widget in self.widget_group:
             
             if widget.is_hovered_over(pos) and click:
                 widget.pressed()
-
+            if isinstance(widget, TextInput):
+                if widget.is_hovered_over(pos) and click:
+                    widget.selected = True
+                    
+                elif not widget.is_hovered_over(pos) and click:
+                    widget.selected = False
+    
+                if widget.selected:
+                    widget.highlight()
+                widget.input_handler(pressed_keys)
+                
             widget.update()
             self.image.blit(widget.image, widget.position)
         self.display.blit(source = self.image, dest=self.rect)

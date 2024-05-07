@@ -84,20 +84,20 @@ class FoodListScreen(gui_components.Screen):
     def switch_to_main(self):
         self.GameStateManager.current_state = 'main_screen'
         
-    def run(self, pos: tuple[int,int], click: bool):
+    def run(self, pos:tuple[int,int], click: bool, pressed_keys: list):
         keys = pygame.key.get_pressed()
             
         self.display.fill(self.bg_color)
-        self.title_menu.draw(pos, click)
-        self.back_menu.draw(pos, click)
-        self.food_scroll_menus[self.food_scroll_index].draw(pos, click)
+        self.title_menu.draw(pos, click, pressed_keys)
+        self.back_menu.draw(pos, click, pressed_keys)
+        self.food_scroll_menus[self.food_scroll_index].draw(pos, click, pressed_keys)
         
         if self.index_limit_upper:
-            self.next_menu.draw(pos, click)
+            self.next_menu.draw(pos, click, pressed_keys)
         else:
             self.next_menu.clear()
             
         if self.index_limit_lower:
-            self.previous_menu.draw(pos, click)
+            self.previous_menu.draw(pos, click, pressed_keys)
         else:
             self.previous_menu.clear()
