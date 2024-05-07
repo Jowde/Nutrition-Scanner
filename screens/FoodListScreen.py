@@ -39,9 +39,9 @@ class FoodListScreen(gui_components.Screen):
         self.previous_button = gui_components.Button(self.previous_menu, relative_padding=(.6,.7), bg_color=BUTTON_COLOR1, on_press=self.decrease_index, text='Previous', text_size=FONT_SIZE)
         self.previous_menu.init_widgets()
 
-        self.addremove_menu = gui_compenonts.Menu(self.display, relative_size=(.2, .2), position='topright', layout='vertical')
-        self.add_item = gui_compenonts.Button(self.addremove_menu, relative_padding=(.6, .7), text='Add Item', bg_color=BUTTON_COLOR1, text_size=FONT_SIZE, on_press=self.switch_to_addItem)
-        self.remove_item = gui_compenonts.Button(self.addremove_menu, relative_padding=(.6, .7), text="Remove Item", bg_color=BUTTON_COLOR1, text_size=FONT_SIZE, on_press=self.remove_item)
+        self.addremove_menu = gui_components.Menu(self.display, relative_size=(.2, .2), position='topright', layout='vertical')
+        self.add_item = gui_components.Button(self.addremove_menu, relative_padding=(.6, .7), text='Add Item', bg_color=BUTTON_COLOR1, text_size=FONT_SIZE, on_press=self.switch_to_addItem)
+        self.remove_item = gui_components.Button(self.addremove_menu, relative_padding=(.6, .7), text="Remove Item", bg_color=BUTTON_COLOR1, text_size=FONT_SIZE, on_press=self.remove_item)
         self.addremove_menu.init_widgets()
 
         self.init_menus()

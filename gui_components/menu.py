@@ -71,9 +71,6 @@ class Menu(Sprite):
             self.rect.bottom = self.display.get_height()
         else:
             print(f'invalid position for {self}')
-        
-        else:
-            print(f'invalid position for {self}')
     
     def add_widget(self, widget):
         self.widget_group.add(widget)
