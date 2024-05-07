@@ -91,7 +91,6 @@ class TextInput(Button):
                     self.current_index +=1
                 elif event.key == pygame.K_LEFT:
                     self.current_index -=1
-                print(self.current_index)
 
     def update(self):
         if self.counter > 0:
