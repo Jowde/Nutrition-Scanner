@@ -16,7 +16,6 @@ class InfoHandler:
         foods = open(self.file_path, 'w')
         for food in self.food_dict:
             current_food = self.food_dict[food]
-            print(current_food)
             foods.write(f"{food},{current_food['serving_size']},{current_food['calories']},{current_food['fat']},{current_food['saturated_fat']},{current_food['unsaturated_fat']},{current_food['carbs']},{current_food['fiber']},{current_food['sugars']},{current_food['added_sugars']},{current_food['protein']}")
         foods.close()
     

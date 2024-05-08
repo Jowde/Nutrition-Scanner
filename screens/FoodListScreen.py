@@ -45,7 +45,7 @@ class FoodListScreen(gui_components.Screen):
         func = lambda : self.navigate_to_foodlist()
 
         self.addremove_menu = gui_components.Menu(self.display, relative_size=(.2, .2), position='topright', layout='vertical')
-        self.add_item = gui_components.Button(self.addremove_menu, relative_padding=(.6, .7), text='Add Item', bg_color=BUTTON_COLOR1, text_size=FONT_SIZE, on_press=func)
+        self.add_item = gui_components.Button(self.addremove_menu, relative_padding=(.6, .7), text='Add Item', bg_color=BUTTON_COLOR1, text_size=FONT_SIZE, on_press=self.add_item)
         self.remove_item = gui_components.Button(self.addremove_menu, relative_padding=(.6, .7), text="Remove Item", bg_color=BUTTON_COLOR1, text_size=FONT_SIZE, on_press=self.remove_item)
         self.addremove_menu.init_widgets()
         
@@ -102,11 +102,11 @@ class FoodListScreen(gui_components.Screen):
     def remove_item(self):
         self.removing_item = True
         self.GameStateManager.current_state = 'name_prompt_screen'
-        print(self.removing_item)
         
-
-    def switch_to_addItem(self):
-        self.GameStateManager.current_state = 'add_item_screen'
+    def add_item(self):
+        self.adding_item = True
+        self.GameStateManager.current_state = 'name_prompt_screen'
+    
 
     def switch_to_nutrient_label(self, index):
         self.GameStateManager.screens_index = index
@@ -116,10 +116,6 @@ class FoodListScreen(gui_components.Screen):
         self.GameStateManager.current_state = 'main_screen'
         
     def run(self, pos:tuple[int,int], click: bool, pressed_keys: list):
-            
-    
-        
-    
         self.display.fill(self.bg_color)
         self.title_menu.draw(pos, click, pressed_keys)
         self.back_menu.draw(pos, click, pressed_keys)

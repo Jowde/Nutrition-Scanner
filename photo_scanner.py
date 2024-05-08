@@ -6,7 +6,7 @@ from text_convertor import TextConvertor
 import info_handler
 
 
-class PhotoScanner():
+class PhotoScanner:
     def __init__(self) -> None:
         self.img_counter = 0 
         self.startWindow = False

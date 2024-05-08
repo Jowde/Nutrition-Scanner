@@ -34,7 +34,8 @@ class NamePromptScreen(gui_components.Screen):
 
     def switch_to_correct_screen(self):
         if self.foodlistscreen.adding_item:
-            pass
+            print('here')
+            
         elif self.foodlistscreen.removing_item:
             try:
                 foodItem = self.foodlistscreen.info_handler.food_from_dict(self.name_prompt.text)
