@@ -20,7 +20,14 @@ class GUI:
         self.FoodListScreen = screens.FoodListScreen(self.display, self.GSM)
         self.AddItemScreen = screens.AddItemScreen(self.display, self.GSM)
         self.ChooseWeightScreen = screens.ChooseWeightScreen(self.display, self.GSM)
-        self.screens = {'main_screen': self.MainScreen, 'foodlist_screen': self.FoodListScreen, 'nutrient_screens': self.FoodListScreen.nutrient_screens, 'add_item_screen': self.AddItemScreen, 'choose_weight_screen': self.ChooseWeightScreen}
+        self.name_prompt_screen = screens.NamePromptScreen(self.display, self.GSM)
+        
+        self.screens = {'main_screen': self.MainScreen, 
+                        'foodlist_screen': self.FoodListScreen, 
+                        'nutrient_screens': self.FoodListScreen.nutrient_screens, 
+                        'add_item_screen': self.AddItemScreen, 
+                        'choose_weight_screen': self.ChooseWeightScreen,
+                        'name_prompt_screen': self.name_prompt_screen}
         
         self.max_click_cooldown = 45
         self.click_cooldown = 0
@@ -70,7 +77,3 @@ if __name__ =='__main__':
     gui = GUI()
     gui.main_loop()
         
-        
-    
-
-    

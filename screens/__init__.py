@@ -3,3 +3,4 @@ from screens.FoodListScreen import FoodListScreen
 from screens.NutrientLabelScreen import NutrientLabel
 from screens.AddItemScreen import AddItemScreen
 from screens.ChooseWeightScreen import ChooseWeightScreen
+from screens.name_prompt_screen import NamePromptScreen

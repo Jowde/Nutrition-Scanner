@@ -83,6 +83,84 @@ class TextInput(Button):
                 elif event.key == pygame.K_9:
                     self.text = self.text[:self.current_index] + '9'+  self.text[self.current_index:]
                     self.current_index +=1
+                elif event.key == pygame.K_q:
+                    self.text = self.text[:self.current_index] + 'q'+  self.text[self.current_index:]
+                    self.current_index +=1
+                elif event.key == pygame.K_w:
+                    self.text = self.text[:self.current_index] + 'w'+  self.text[self.current_index:]
+                    self.current_index +=1
+                elif event.key == pygame.K_e:
+                    self.text = self.text[:self.current_index] + 'e'+  self.text[self.current_index:]
+                    self.current_index +=1
+                elif event.key == pygame.K_r:
+                    self.text = self.text[:self.current_index] + 'r'+  self.text[self.current_index:]
+                    self.current_index +=1
+                elif event.key == pygame.K_t:
+                    self.text = self.text[:self.current_index] + 't'+  self.text[self.current_index:]
+                    self.current_index +=1
+                elif event.key == pygame.K_y:
+                    self.text = self.text[:self.current_index] + 'y'+  self.text[self.current_index:]
+                    self.current_index +=1
+                elif event.key == pygame.K_u:
+                    self.text = self.text[:self.current_index] + 'u'+  self.text[self.current_index:]
+                    self.current_index +=1
+                elif event.key == pygame.K_i:
+                    self.text = self.text[:self.current_index] + 'i'+  self.text[self.current_index:]
+                    self.current_index +=1
+                elif event.key == pygame.K_o:
+                    self.text = self.text[:self.current_index] + 'o'+  self.text[self.current_index:]
+                    self.current_index +=1
+                elif event.key == pygame.K_p:
+                    self.text = self.text[:self.current_index] + 'p'+  self.text[self.current_index:]
+                    self.current_index +=1
+                elif event.key == pygame.K_a:
+                    self.text = self.text[:self.current_index] + 'a'+  self.text[self.current_index:]
+                    self.current_index +=1
+                elif event.key == pygame.K_s:
+                    self.text = self.text[:self.current_index] + 's'+  self.text[self.current_index:]
+                    self.current_index +=1
+                elif event.key == pygame.K_d:
+                    self.text = self.text[:self.current_index] + 'd'+  self.text[self.current_index:]
+                    self.current_index +=1
+                elif event.key == pygame.K_f:
+                    self.text = self.text[:self.current_index] + 'f'+  self.text[self.current_index:]
+                    self.current_index +=1
+                elif event.key == pygame.K_g:
+                    self.text = self.text[:self.current_index] + 'g'+  self.text[self.current_index:]
+                    self.current_index +=1
+                elif event.key == pygame.K_h:
+                    self.text = self.text[:self.current_index] + 'h'+  self.text[self.current_index:]
+                    self.current_index +=1
+                elif event.key == pygame.K_j:
+                    self.text = self.text[:self.current_index] + 'j'+  self.text[self.current_index:]
+                    self.current_index +=1
+                elif event.key == pygame.K_k:
+                    self.text = self.text[:self.current_index] + 'k'+  self.text[self.current_index:]
+                    self.current_index +=1
+                elif event.key == pygame.K_l:
+                    self.text = self.text[:self.current_index] + 'l'+  self.text[self.current_index:]
+                    self.current_index +=1
+                elif event.key == pygame.K_z:
+                    self.text = self.text[:self.current_index] + 'z'+  self.text[self.current_index:]
+                    self.current_index +=1
+                elif event.key == pygame.K_x:
+                    self.text = self.text[:self.current_index] + 'x'+  self.text[self.current_index:]
+                    self.current_index +=1
+                elif event.key == pygame.K_c:
+                    self.text = self.text[:self.current_index] + 'c'+  self.text[self.current_index:]
+                    self.current_index +=1
+                elif event.key == pygame.K_v:
+                    self.text = self.text[:self.current_index] + 'v'+  self.text[self.current_index:]
+                    self.current_index +=1
+                elif event.key == pygame.K_b:
+                    self.text = self.text[:self.current_index] + 'b'+  self.text[self.current_index:]
+                    self.current_index +=1
+                elif event.key == pygame.K_n:
+                    self.text = self.text[:self.current_index] + 'n'+  self.text[self.current_index:]
+                    self.current_index +=1
+                elif event.key == pygame.K_m:
+                    self.text = self.text[:self.current_index] + 'm'+  self.text[self.current_index:]
+                    self.current_index +=1
                 elif event.key == pygame.K_BACKSPACE:
                     if len(self.text) > 0 and self.current_index - 1 >= 0:
                             self.text = self.text[:self.current_index - 1] + self.text[self.current_index:]
@@ -106,14 +184,14 @@ class TextInput(Button):
             try:
                 pygame.draw.line(self.image, 
                                 self.display_line_colors[self.display_line_index], 
-                                (self.current_index/(len(self.text)) * self.text_surface.get_width() + (rect.left), 0),
-                                (self.current_index/(len(self.text)) * self.text_surface.get_width() + (rect.left), self.text_surface.get_height()), 
+                                (self.current_index/(len(self.text)) * self.text_surface.get_width() + (rect.left), rect.top),
+                                (self.current_index/(len(self.text)) * self.text_surface.get_width() + (rect.left), rect.bottom), 
                                 width=1)
             except:
                     pygame.draw.line(self.image, 
                                 self.display_line_colors[self.display_line_index], 
-                                (0 * self.text_surface.get_width() + (rect.left), 0),
-                                (0 * self.text_surface.get_width() + (rect.left), self.text_surface.get_height()), 
+                                (0 * self.text_surface.get_width() + (rect.left), rect.top),
+                                (0 * self.text_surface.get_width() + (rect.left), rect.bottom), 
                                 width=1)
             
         if self.border_width > 0:

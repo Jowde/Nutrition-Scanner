@@ -5,7 +5,6 @@ BACKGROUND_COLOR = pygame.Color(255,255,255)
 MENU_COLOR = pygame.Color(125,125,125)
 BUTTON_COLOR = pygame.Color(125,125,200)
 FONT_SIZE = 22
-
 class MainScreen(gui_components.Screen):
     def __init__(self, display, GameStateManager: "gui_components.GameStateManager", bg_color: pygame.Color = BACKGROUND_COLOR):
         super().__init__(display, GameStateManager, bg_color)
