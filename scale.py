@@ -50,7 +50,7 @@ class Scale:
                     mass = terminalLine.rsplit("average:")[-1].strip()
                     if DEBUG:
                         print(f"mass={mass}")
-                    return mass
+                    return int(mass)
 
 '''
 Test main
