@@ -45,3 +45,13 @@ Began physical construction of the scale box using
 cardboard and plywood; begun RPi into Potato integration
 
 24.5.7
+Aborted RPi into potato integration in favor of
+arduino scale work. Potato does not lend itself to
+RPi work because the pineworkslabs library is not comprehensive.
+
+Scale build was finished today.
+
+24.5.8
+Finished scale code and arduino integration.
+
+Scale now works.
