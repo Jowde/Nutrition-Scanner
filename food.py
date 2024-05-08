@@ -26,7 +26,7 @@ class Food:
                  added_sugars:int=0, protein:int=0) -> None:
         self.food_name= str(food_name)
         
-        self.serving_size= float(serving_size)
+        self.serving_size= int(serving_size)
         self.calories=int(calories)
         self.carbs=int(carbs)
         self.fat=int(fat)
@@ -150,16 +150,17 @@ class Food:
         '''
         returns dictionary of items for the info handler 
         '''
-        return  {'calories':self.calories, 
+        return  {'serving_size':self.serving_size,
+                'calories':self.calories, 
                 'fat':self.fat, 
-                'protein':self.protein, 
-                'carbs':self.carbs, 
-                'sugars':self.sugars,
-                'fiber':self.fiber, 
-                'added_sugar':self.added_sugars, 
                 'saturated_fat':self.saturated_fat, 
                 'unsaturated_fat':self.unsaturated_fat,
-                'serving_size':self.serving_size}
+                'carbs':self.carbs, 
+                'fiber':self.fiber, 
+                'sugars':self.sugars,
+                'added_sugars':self.added_sugars, 
+                'protein':str(self.protein) + '\n'
+                }
             
     def __str__(self):
         # includes major macros [calories,fat,protein,carbs,sugars,fiber]

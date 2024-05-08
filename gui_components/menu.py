@@ -87,9 +87,6 @@ class Menu(Sprite):
         
     def draw(self, pos: tuple[int, int], click: bool, pressed_keys: list):
         for widget in self.widget_group:
-            
-            if widget.is_hovered_over(pos) and click:
-                widget.pressed()
             if isinstance(widget, TextInput):
                 if widget.is_hovered_over(pos) and click:
                     widget.selected = True
@@ -100,6 +97,10 @@ class Menu(Sprite):
                 if widget.selected:
                     widget.highlight()
                 widget.input_handler(pressed_keys)
+                
+            if widget.is_hovered_over(pos) and click:
+                widget.pressed()
+                click = False
                 
             widget.update()
             self.image.blit(widget.image, widget.position)

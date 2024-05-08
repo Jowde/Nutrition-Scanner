@@ -19,5 +19,4 @@ class DimensionalAnalysis:
     
     def convert(self, inWeight, baseServing, macro):
         newMacro = macro * (float(inWeight)//float(baseServing))
-        print(newMacro)
         return newMacro

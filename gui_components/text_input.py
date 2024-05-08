@@ -17,7 +17,7 @@ class TextInput(Button):
         self.min_index = min_index
         self.max_index = max_index
         
-        self.max_counter = 90
+        self.max_counter = 120
         self.counter = self.max_counter
         
         self.display_line_colors = [pygame.Color(0,0,0), pygame.Color(125,125,125)]
@@ -103,11 +103,18 @@ class TextInput(Button):
         self.image.blit(self.text_surface, rect)
         
         if self.selected:
-            pygame.draw.line(self.image, 
-                            self.display_line_colors[self.display_line_index], 
-                            (self.current_index/(len(self.text)) * self.text_surface.get_width() + (rect.left), 0),
-                            (self.current_index/(len(self.text)) * self.text_surface.get_width() + (rect.left), self.text_surface.get_height()), 
-                            width=1)
+            try:
+                pygame.draw.line(self.image, 
+                                self.display_line_colors[self.display_line_index], 
+                                (self.current_index/(len(self.text)) * self.text_surface.get_width() + (rect.left), 0),
+                                (self.current_index/(len(self.text)) * self.text_surface.get_width() + (rect.left), self.text_surface.get_height()), 
+                                width=1)
+            except:
+                    pygame.draw.line(self.image, 
+                                self.display_line_colors[self.display_line_index], 
+                                (0 * self.text_surface.get_width() + (rect.left), 0),
+                                (0 * self.text_surface.get_width() + (rect.left), self.text_surface.get_height()), 
+                                width=1)
             
         if self.border_width > 0:
             rect = self.image.get_rect(right = self.image.get_width(), bottom = self.image.get_height())

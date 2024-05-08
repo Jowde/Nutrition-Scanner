@@ -16,7 +16,7 @@ class InfoHandler:
         foods = open(self.file_path, 'w')
         for food in self.food_dict:
             current_food = self.food_dict[food]
-            print(current_food['calories'])
+            print(current_food)
             foods.write(f"{food},{current_food['serving_size']},{current_food['calories']},{current_food['fat']},{current_food['saturated_fat']},{current_food['unsaturated_fat']},{current_food['carbs']},{current_food['fiber']},{current_food['sugars']},{current_food['added_sugars']},{current_food['protein']}")
         foods.close()
     
@@ -24,7 +24,6 @@ class InfoHandler:
         foods = open(self.file_path)
         foodslist = foods.readlines()
         for line in foodslist:
-            
             foodinfo = line.replace('\n','')
             foodinfo = line.split(',') # should probably add serving size in grams lol
             self.food_dict[foodinfo[0]] = { 'serving_size':foodinfo[1],
@@ -41,13 +40,12 @@ class InfoHandler:
         foods.close()
 
     def add_item(self, food: Food):
-        self.food_dict[food.food_name] = food.convert_to_dict()
+        self.food_dict[food.food_name] = food.return_dict()
             
     def remove_item(self, foodName):
         del self.food_dict[foodName.food_name]
     
             
-    
     def food_from_dict(self, name:str):
             return Food(food_name= name, 
                         serving_size=self.food_dict[name]['serving_size'], 
@@ -74,5 +72,4 @@ if __name__ =='__main__':
     for item in foodinfo.food_dict:
         print(foodinfo.food_dict[item])
     foodinfo.food_dict[apple.food_name] = apple.return_dict()
-    
     foodinfo.savetofile()

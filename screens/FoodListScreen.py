@@ -74,7 +74,7 @@ class FoodListScreen(gui_components.Screen):
                 self.food_scroll_menus.append(gui_components.Menu(self.display, relative_size=(.7, .7), bg_color=MENU_COLOR, layout='vertical'))
                 index = 0
     
-            self.nutrient_screens.append(NutrientLabel(self.display, self.GameStateManager, self.info_handler.food_from_dict(food)))
+            self.nutrient_screens.append(NutrientLabel(self.display, self.GameStateManager, self.info_handler.food_from_dict(food), self.info_handler))
             
 
             on_press_func = lambda x=len(self.nutrient_screens) - 1: self.switch_to_nutrient_label(x)
@@ -111,19 +111,16 @@ class FoodListScreen(gui_components.Screen):
         self.GameStateManager.current_state = 'main_screen'
         
     def run(self, pos:tuple[int,int], click: bool, pressed_keys: list):
-        keys = pygame.key.get_pressed()
             
+    
+        self.next_menu.draw(pos, click, pressed_keys)
+       
+         
+        self.previous_menu.draw(pos, click, pressed_keys)
+    
         self.display.fill(self.bg_color)
         self.title_menu.draw(pos, click, pressed_keys)
         self.back_menu.draw(pos, click, pressed_keys)
         self.food_scroll_menus[self.food_scroll_index].draw(pos, click, pressed_keys)
         
-        if self.index_limit_upper:
-            self.next_menu.draw(pos, click, pressed_keys)
-        else:
-            self.next_menu.clear()
-            
-        if self.index_limit_lower:
-            self.previous_menu.draw(pos, click, pressed_keys)
-        else:
-            self.previous_menu.clear()
+        
