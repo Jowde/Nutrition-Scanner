@@ -84,7 +84,7 @@ class FoodListScreen(gui_components.Screen):
             self.nutrient_screens.append(NutrientLabel(self.display, self.GameStateManager, self.info_handler.food_from_dict(food), self.info_handler))
             
 
-            on_press_func = lambda x=len(self.nutrient_screens) - 1: self.switch_to_nutrient_label(x)
+            on_press_func = lambda x=self.find_index_of_food(food): self.switch_to_nutrient_label(x)
             
             gui_components.Button(self.food_scroll_menus[-1], text=f'{food}', relative_padding=(.3, .3), bg_color=pygame.Color(125,125,200), on_press=on_press_func, hover_highlight=1.25, text_size=FONT_SIZE)
             
@@ -98,6 +98,12 @@ class FoodListScreen(gui_components.Screen):
             menu.init_widgets()
             
         self.max_index = len(self.food_scroll_menus) - 1
+        
+    def find_index_of_food(self, food):
+        for index, screen in enumerate(self.nutrient_screens): 
+            if screen.food_info.food_name == food:
+                return index
+        return -1
     
     def remove_item(self):
         self.removing_item = True

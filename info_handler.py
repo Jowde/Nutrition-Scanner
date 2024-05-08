@@ -25,7 +25,6 @@ class InfoHandler:
         for line in foodslist:
             foodinfo = line.replace('\n','')
             foodinfo = line.split(',') # should probably add serving size in grams lol
-            print(foodinfo)
             self.food_dict[foodinfo[0]] = { 'serving_size':foodinfo[1],
                                             'calories':foodinfo[2], 
                                             'fat': foodinfo[3],

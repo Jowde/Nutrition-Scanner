@@ -62,12 +62,9 @@ class GUI:
             if self.GSM.current_state != 'nutrient_screens':
                 self.screens[self.GSM.current_state].run(pos, click, pressed_keys)
             else:
-                while True: #LMAOOOOOOOOO THIS IS TERRIBLE 
-                    try: 
-                        self.screens['nutrient_screens'][self.GSM.screens_index].run(pos, click, pressed_keys)
-                        break
-                    except:
-                        self.GSM.screens_index -=1
+                self.screens['nutrient_screens'] = self.FoodListScreen.nutrient_screens
+                self.screens['nutrient_screens'][self.GSM.screens_index].run(pos, click, pressed_keys)
+                    
                         
             pressed_keys = []
             

@@ -48,8 +48,10 @@ class NamePromptScreen(gui_components.Screen):
                  added_sugars = 0,
                  protein = 0)   
             self.foodlistscreen.info_handler.add_item(new_food_item) 
+            self.foodlistscreen.adding_item = False
+            self.foodlistscreen.food_scroll_index = 0
             self.foodlistscreen.init_menus()
-            self.GameStateManager.screens_index = len(self.foodlistscreen.nutrient_screens) - 1 
+            self.GameStateManager.screens_index = self.foodlistscreen.find_index_of_food(new_food_item.food_name)
             self.GameStateManager.current_state = 'nutrient_screens'
              
         elif self.foodlistscreen.removing_item:
