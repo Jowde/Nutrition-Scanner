@@ -5,7 +5,7 @@ import serial.tools.list_ports
 # used as a basis
 
 # debug variable for prints
-DEBUG = True
+DEBUG = False
 
 class Scale:
     def __init__(self) -> None:
