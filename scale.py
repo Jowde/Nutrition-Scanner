@@ -5,7 +5,7 @@ import serial.tools.list_ports
 # used as a basis
 
 # debug variable for prints
-DEBUG = False
+DEBUG = True
 
 class Scale:
     def __init__(self) -> None:
@@ -22,8 +22,10 @@ class Scale:
         # by default, the port number will be 3
         val = 3
         # allow user change if it's in debug mode
-        if DEBUG:
-            val = input("Select port: COM")
+        if len(portList)>1:
+            if DEBUG:
+                val = input("Select port: COM")
+        
 
         # go through each port detected
         for port in portList:
@@ -43,14 +45,14 @@ class Scale:
                 packet = self.serialInstance.readline()
                 terminalLine = packet.decode("utf").rstrip("\n")
                 print(terminalLine)
-                if DEBUG:
+                '''if DEBUG: # not needed, but worth keeping
                     temp = terminalLine.find("one reading:")
-                    print(f"         {temp}")
+                    print(f"         {temp}")'''
                 if terminalLine.find("one reading:")>=0:
-                    mass = terminalLine.rsplit("average:")[-1].strip()
-                    if DEBUG:
-                        print(f"mass={mass}")
-                    return int(mass)
+                    mass = int( float( terminalLine.rsplit("average:")[-1].strip() ) )
+                    if mass<0:
+                        mass=0
+                    return (mass)
 
 '''
 Test main
@@ -58,5 +60,5 @@ Test main
 if DEBUG:
     scale = Scale()
     while True:
-        print(f"mass={scale.get_mass()}")
+        print(f"mass = {scale.get_mass()}g")
         pass
