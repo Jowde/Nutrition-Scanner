@@ -58,4 +58,5 @@ Test main
 if DEBUG:
     scale = Scale()
     while True:
-        print(scale.get_mass())
+        print(f"mass={scale.get_mass()}")
+        pass
