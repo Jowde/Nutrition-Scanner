@@ -24,6 +24,9 @@ class FoodListScreen(gui_components.Screen):
         
         self.nutrient_screens = []
         
+        self.adding_item = False
+        self.removing_item = False
+        
         self.info_handler = InfoHandler('foods.csv')
         self.info_handler.loadfromfile()
         
@@ -43,7 +46,7 @@ class FoodListScreen(gui_components.Screen):
 
         self.addremove_menu = gui_components.Menu(self.display, relative_size=(.2, .2), position='topright', layout='vertical')
         self.add_item = gui_components.Button(self.addremove_menu, relative_padding=(.6, .7), text='Add Item', bg_color=BUTTON_COLOR1, text_size=FONT_SIZE, on_press=func)
-        self.remove_item = gui_components.Button(self.addremove_menu, relative_padding=(.6, .7), text="Remove Item", bg_color=BUTTON_COLOR1, text_size=FONT_SIZE, on_press=func)
+        self.remove_item = gui_components.Button(self.addremove_menu, relative_padding=(.6, .7), text="Remove Item", bg_color=BUTTON_COLOR1, text_size=FONT_SIZE, on_press=self.remove_item)
         self.addremove_menu.init_widgets()
         
         self.init_menus()
@@ -97,11 +100,9 @@ class FoodListScreen(gui_components.Screen):
         self.max_index = len(self.food_scroll_menus) - 1
     
     def remove_item(self):
-        foodName = input("What food item do you want to remove")
-        foodItem = self.info_handler.food_from_dict(foodName)
-        self.info_handler.remove_item(foodItem)
-        self.food_scroll_index = 0
-        self.init_menus()
+        self.removing_item = True
+        self.GameStateManager.current_state = 'name_prompt_screen'
+        print(self.removing_item)
         
 
     def switch_to_addItem(self):

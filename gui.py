@@ -20,7 +20,7 @@ class GUI:
         self.FoodListScreen = screens.FoodListScreen(self.display, self.GSM)
         self.AddItemScreen = screens.AddItemScreen(self.display, self.GSM)
         self.ChooseWeightScreen = screens.ChooseWeightScreen(self.display, self.GSM)
-        self.name_prompt_screen = screens.NamePromptScreen(self.display, self.GSM)
+        self.name_prompt_screen = screens.NamePromptScreen(self.display, self.GSM, self.FoodListScreen)
         
         self.screens = {'main_screen': self.MainScreen, 
                         'foodlist_screen': self.FoodListScreen, 
@@ -64,7 +64,6 @@ class GUI:
             else:
                 self.screens['nutrient_screens'][self.GSM.screens_index].run(pos, click, pressed_keys)
             pressed_keys = []
-            
             
             if click:
                 self.click_cooldown = self.max_click_cooldown
