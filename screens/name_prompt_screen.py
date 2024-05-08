@@ -1,6 +1,7 @@
 import gui_components
 import pygame
-from screens import FoodListScreen
+from screens import FoodListScreen, NutrientLabel
+from food import Food
 BACKGROUND_COLOR = pygame.Color(255,255,255)
 MENU_COLOR = pygame.Color(125,125,125)
 BUTTON_COLOR1 = pygame.Color(125,125,200)
@@ -34,8 +35,23 @@ class NamePromptScreen(gui_components.Screen):
 
     def switch_to_correct_screen(self):
         if self.foodlistscreen.adding_item:
-            print('here')
-            
+            new_food_item = Food(
+                self.name_prompt.text, 
+                 serving_size = 0,
+                 calories = 0,
+                 fat =0,
+                 saturated_fat = 0,
+                 unsaturated_fat =0,
+                 carbs =0,
+                 fiber = 0,
+                 sugars = 0,
+                 added_sugars = 0,
+                 protein = 0)   
+            self.foodlistscreen.info_handler.add_item(new_food_item) 
+            self.foodlistscreen.init_menus()
+            self.GameStateManager.screens_index = len(self.foodlistscreen.nutrient_screens) - 1 
+            self.GameStateManager.current_state = 'nutrient_screens'
+             
         elif self.foodlistscreen.removing_item:
             try:
                 foodItem = self.foodlistscreen.info_handler.food_from_dict(self.name_prompt.text)

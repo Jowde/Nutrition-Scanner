@@ -12,7 +12,7 @@ class MainScreen(gui_components.Screen):
         self.main_menu = gui_components.Menu(self.display, (.7, .7), bg_color=MENU_COLOR, layout='vertical')
         
         self.food_list_button = gui_components.Button(self.main_menu, relative_padding=(.2, .2), text='Food List', bg_color=BUTTON_COLOR, on_press=self.switch_to_food_list, text_size=FONT_SIZE)
-        self.weight_portion = gui_components.Button(self.main_menu, text="Choose Weight", bg_color=BUTTON_COLOR, relative_padding=(.2, .2), text_size=FONT_SIZE, on_press=self.switch_to_choose_weight)
+        #self.weight_portion = gui_components.Button(self.main_menu, text="Choose Weight", bg_color=BUTTON_COLOR, relative_padding=(.2, .2), text_size=FONT_SIZE, on_press=self.switch_to_choose_weight)
         self.exit_button = gui_components.Button(self.main_menu, text = 'Exit', bg_color=BUTTON_COLOR, relative_padding=(.2, .2), text_size=FONT_SIZE, on_press=pygame.quit)
         
         self.main_menu.init_widgets()
