@@ -3,7 +3,7 @@ import pygame
 import gui_components.game_state_manager
 import gui_components.screen 
 import screens
-import screens.AddItemScreen
+import screens.edit_screen
 POTATO_SCREEN_SIZE = (1024, 600)
 FPS = 60
 class GUI:
@@ -18,14 +18,14 @@ class GUI:
         self.GSM = gui_components.GameStateManager('main_screen')
         self.MainScreen = screens.MainScreen(self.display, self.GSM)
         self.FoodListScreen = screens.FoodListScreen(self.display, self.GSM)
-        self.AddItemScreen = screens.AddItemScreen(self.display, self.GSM)
+        self.EditScreen = screens.EditScreen(self.display, self.GSM, self.FoodListScreen)
         self.ChooseWeightScreen = screens.ChooseWeightScreen(self.display, self.GSM)
-        self.name_prompt_screen = screens.NamePromptScreen(self.display, self.GSM, self.FoodListScreen)
+        self.name_prompt_screen = screens.NamePromptScreen(self.display, self.GSM, self.FoodListScreen, self.EditScreen)
         
         self.screens = {'main_screen': self.MainScreen, 
                         'foodlist_screen': self.FoodListScreen, 
                         'nutrient_screens': self.FoodListScreen.nutrient_screens, 
-                        'add_item_screen': self.AddItemScreen, 
+                        'edit_screen': self.EditScreen, 
                         'choose_weight_screen': self.ChooseWeightScreen,
                         'name_prompt_screen': self.name_prompt_screen}
         

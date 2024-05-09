@@ -1,14 +1,16 @@
 import gui_components
 import pygame
-from screens import FoodListScreen, NutrientLabel
+from screens import FoodListScreen, EditScreen
 from food import Food
 BACKGROUND_COLOR = pygame.Color(255,255,255)
 MENU_COLOR = pygame.Color(125,125,125)
 BUTTON_COLOR1 = pygame.Color(125,125,200)
 FONT_SIZE = 22
 class NamePromptScreen(gui_components.Screen):
-    def __init__(self, display, GameStateManager: "gui_components.GameStateManager", foodlistscreen:FoodListScreen, bg_color: pygame.Color = BACKGROUND_COLOR):
+    def __init__(self, display, GameStateManager: "gui_components.GameStateManager", foodlistscreen:FoodListScreen, editscreen: EditScreen, bg_color: pygame.Color = BACKGROUND_COLOR):
         super().__init__(display, GameStateManager, bg_color)
+        
+        self.editscreen = editscreen
         
         self.foodlistscreen = foodlistscreen
         self.name_prompt_menu = gui_components.Menu(self.display, relative_size=(.6, .7), bg_color=MENU_COLOR, layout='vertical')
@@ -35,6 +37,7 @@ class NamePromptScreen(gui_components.Screen):
 
     def switch_to_correct_screen(self):
         if self.foodlistscreen.adding_item:
+            self.foodlistscreen.adding_item = False
             new_food_item = Food(
                 self.name_prompt.text, 
                  serving_size = 0,
@@ -48,19 +51,19 @@ class NamePromptScreen(gui_components.Screen):
                  added_sugars = 0,
                  protein = 0)   
             self.foodlistscreen.info_handler.add_item(new_food_item) 
-            self.foodlistscreen.adding_item = False
             self.foodlistscreen.food_scroll_index = 0
             self.foodlistscreen.init_menus()
-            self.GameStateManager.screens_index = self.foodlistscreen.find_index_of_food(new_food_item.food_name)
-            self.GameStateManager.current_state = 'nutrient_screens'
+            self.editscreen.food_info = new_food_item
+            self.GameStateManager.current_state = 'edit_screen'
+            
              
         elif self.foodlistscreen.removing_item:
             try:
+                self.foodlistscreen.removing_item = False
                 foodItem = self.foodlistscreen.info_handler.food_from_dict(self.name_prompt.text)
                 self.foodlistscreen.info_handler.remove_item(foodItem)
                 self.foodlistscreen.food_scroll_index = 0
                 self.foodlistscreen.init_menus()
-                self.foodlistscreen.removing_item = False
                 self.switch_to_food_list()
             except:
                 self.titleLabel.text = 'invalid food name'

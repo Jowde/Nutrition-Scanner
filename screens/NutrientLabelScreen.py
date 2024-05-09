@@ -143,7 +143,7 @@ class NutrientLabel(gui_components.Screen):
         self.edit_menu = gui_components.Menu(self.display, relative_size=(.1, .1), position='topright')
         self.edit_button = gui_components.Button(self.edit_menu, relative_padding=(.2,.3), bg_color=BUTTON_COLOR, on_press=self.make_new_food, text='Confirm')
         self.edit_menu.init_widgets()
-        #might be able to call these functions when a widget is added Need to look into - Jude (note to self)
+        #might be able to call these functions when a widget is added Need to look into - Jude (note to self) Really needed to remeber this I guess
         self.leftSideMenu.init_widgets()
         self.rightSideMenu.init_widgets()
         
@@ -151,22 +151,21 @@ class NutrientLabel(gui_components.Screen):
         self.titleMenu.init_widgets()
         
     def make_new_food(self):
-    
-            new_food_info = Food(food_name=self.food_info.food_name,
-                                 serving_size=self.servingSizeBtnVal.text,
-                                 calories=self.caloriesBtnVal.text, 
-                                 fat=self.fatBtnVal.text, 
-                                 saturated_fat=self.saturated_fatBtnVal.text, 
-                                 unsaturated_fat=self.unsaturated_fatBtnVal.text,
-                                 carbs=self.carbsBtnVal.text, 
-                                 fiber=self.fiberBtnVal.text, 
-                                 sugars=self.sugarsBtnVal.text, 
-                                 added_sugars=self.added_sugarBtnVal.text,
-                                 protein = self.proteinBtnVal.text)
-            self.reinit(new_food_info)
-            self.info_handler.add_item(new_food_info)
-            self.info_handler.savetofile()
-            self.info_handler.loadfromfile()
+        new_food_info = Food(food_name=self.food_info.food_name,
+                                serving_size=self.servingSizeBtnVal.text,
+                                calories=self.caloriesBtnVal.text, 
+                                fat=self.fatBtnVal.text, 
+                                saturated_fat=self.saturated_fatBtnVal.text, 
+                                unsaturated_fat=self.unsaturated_fatBtnVal.text,
+                                carbs=self.carbsBtnVal.text, 
+                                fiber=self.fiberBtnVal.text, 
+                                sugars=self.sugarsBtnVal.text, 
+                                added_sugars=self.added_sugarBtnVal.text,
+                                protein = self.proteinBtnVal.text)
+        self.reinit(new_food_info)
+        self.info_handler.add_item(new_food_info)
+        self.info_handler.savetofile()
+        self.info_handler.loadfromfile()
     
         
         
