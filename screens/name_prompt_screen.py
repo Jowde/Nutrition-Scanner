@@ -2,6 +2,7 @@ import gui_components
 import pygame
 from screens import FoodListScreen, EditScreen
 from food import Food
+
 BACKGROUND_COLOR = pygame.Color(255,255,255)
 MENU_COLOR = pygame.Color(125,125,125)
 BUTTON_COLOR1 = pygame.Color(125,125,200)
@@ -36,7 +37,18 @@ class NamePromptScreen(gui_components.Screen):
         self.GameStateManager.current_state = 'foodlist_screen'
 
     def switch_to_correct_screen(self):
-        if self.foodlistscreen.adding_item:
+        if self.foodlistscreen.removing_item:
+            try:
+                self.foodlistscreen.removing_item = False
+                foodItem = self.foodlistscreen.info_handler.food_from_dict(self.name_prompt.text)
+                self.foodlistscreen.info_handler.remove_item(foodItem)
+                self.foodlistscreen.food_scroll_index = 0
+                self.foodlistscreen.init_menus()
+                self.switch_to_food_list()
+            except:
+                self.titleLabel.text = 'invalid food name'
+                self.titleMenu.init_widgets()
+        elif self.foodlistscreen.adding_item:
             self.foodlistscreen.adding_item = False
             new_food_item = Food(
                 self.name_prompt.text, 
@@ -56,18 +68,6 @@ class NamePromptScreen(gui_components.Screen):
             self.editscreen.food_info = new_food_item
             self.GameStateManager.current_state = 'edit_screen'
             
-             
-        elif self.foodlistscreen.removing_item:
-            try:
-                self.foodlistscreen.removing_item = False
-                foodItem = self.foodlistscreen.info_handler.food_from_dict(self.name_prompt.text)
-                self.foodlistscreen.info_handler.remove_item(foodItem)
-                self.foodlistscreen.food_scroll_index = 0
-                self.foodlistscreen.init_menus()
-                self.switch_to_food_list()
-            except:
-                self.titleLabel.text = 'invalid food name'
-                self.titleMenu.init_widgets()
         else:
             print('name prompt was not given routing info' )
             

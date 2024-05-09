@@ -7,55 +7,55 @@ import info_handler
 
 
 class PhotoScanner:
-    def __init__(self) -> None:
+    def __init__(self, foodName) -> None:
         self.img_counter = 0 
-        self.startWindow = False
         self.my_config = r"--psm 4 --oem 3"
+        self.food_item = TextConvertor(foodName)
     
     def setStartWindow(self):
-        self.startWindow = True
+        self.cam = cv2.VideoCapture(0)
 
-
+    def endWindow(self):
+        self.cam.release()
 #Code below is for taking pictures and scanning
-    def startPhotoWindow(self, foodName):
-        cam = cv2.VideoCapture(0)
+    def startPhotoWindow(self):
+    
+        #reads camera frame
+        ret, frame = self.cam.read()
 
-        while self.startWindow:
-            #reads camera frame
-            ret, frame = cam.read()
+        #Checks if frame is readable
+        if not ret:
+            print('failed to grab frame')
+        
 
-            #Checks if frame is readable
-            if not ret:
-                print('failed to grab frame')
-                break
+        #Gets key press
+        k = cv2.waitKey(1)
+
+        #if Key press is escape
+        '''
+        if k % 256 == 27:
+            print("Escape hit")
+        '''
+        #if key press is space
+        if k % 256 == 32:
+            #prob need to change the way files are saved so they dont overwrite each other when program is closed and ran again 
+            img_name = os.path.join("images", f"opencv_frame_{self.img_counter}.png")
+
+            #saves image to images folder
+            cv2.imwrite(img_name, frame)
+
+            #prints most recently taken screen shot
+            text = pytesseract.image_to_string(PIL.Image.open(img_name), config=self.my_config)
             
-            cv2.imshow('test', frame)
+            self.food_item.text_parser(text)
+            
 
-            #Gets key press
-            k = cv2.waitKey(1)
+            #sets up for next screenshot
+            self.img_counter += 1
+    
+        return os.path.join("images", f"opencv_frame_{self.img_counter -1}.png")
 
-            #if Key press is escape
-            if k % 256 == 27:
-                print("Escape hit")
-                break
-            #if key press is space
-            elif k % 256 == 32:
-                #prob need to change the way files are saved so they dont overwrite each other when program is closed and ran again 
-                img_name = os.path.join("images", f"opencv_frame_{self.img_counter}.png")
-
-                #saves image to images folder
-                cv2.imwrite(img_name, frame)
-
-                #prints most recently taken screen shot
-                text = pytesseract.image_to_string(PIL.Image.open(img_name), config=self.my_config)
-                food_item = TextConvertor(foodName)
-                food_item.text_parser(text)
-                info_handler.add_item(food_item.create_food_item())
-
-                #sets up for next screenshot
-                self.img_counter += 1
-
-        cam.release()
+        
         #cam.destroyAllWindows()
 
 

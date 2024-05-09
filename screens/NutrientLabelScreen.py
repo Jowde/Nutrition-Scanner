@@ -58,6 +58,9 @@ class NutrientLabel(gui_components.Screen):
         
         self.main_menu.init_widgets()
         self.titleMenu.init_widgets()
+        
+        self.adding_item = False
+        self.removing_item = False
     
     def reinit(self, food_info: Food):
         self.food_info = food_info
@@ -166,6 +169,7 @@ class NutrientLabel(gui_components.Screen):
         self.info_handler.add_item(new_food_info)
         self.info_handler.savetofile()
         self.info_handler.loadfromfile()
+        
     
         
         

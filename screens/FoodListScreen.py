@@ -120,6 +120,9 @@ class FoodListScreen(gui_components.Screen):
           
     def switch_to_main(self):
         self.GameStateManager.current_state = 'main_screen'
+
+    def food_from_index(self, index):
+        return self.nutrient_screens[index].food_info.food_name
         
     def run(self, pos:tuple[int,int], click: bool, pressed_keys: list):
         self.display.fill(self.bg_color)
