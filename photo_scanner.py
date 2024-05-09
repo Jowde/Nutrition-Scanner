@@ -28,30 +28,21 @@ class PhotoScanner:
             print('failed to grab frame')
         
 
-        #Gets key press
-        k = cv2.waitKey(1)
+        
+        #prob need to change the way files are saved so they dont overwrite each other when program is closed and ran again 
+        img_name = os.path.join("images", f"opencv_frame_{self.img_counter}.png")
 
-        #if Key press is escape
-        '''
-        if k % 256 == 27:
-            print("Escape hit")
-        '''
-        #if key press is space
-        if k % 256 == 32:
-            #prob need to change the way files are saved so they dont overwrite each other when program is closed and ran again 
-            img_name = os.path.join("images", f"opencv_frame_{self.img_counter}.png")
+        #saves image to images folder
+        cv2.imwrite(img_name, frame)
 
-            #saves image to images folder
-            cv2.imwrite(img_name, frame)
+        #prints most recently taken screen shot
+        text = pytesseract.image_to_string(PIL.Image.open(img_name), config=self.my_config)
+        
+        self.food_item.text_parser(text)
+    
 
-            #prints most recently taken screen shot
-            text = pytesseract.image_to_string(PIL.Image.open(img_name), config=self.my_config)
-            
-            self.food_item.text_parser(text)
-            
-
-            #sets up for next screenshot
-            self.img_counter += 1
+        #sets up for next screenshot
+        self.img_counter += 1
     
         return frame
 

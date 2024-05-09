@@ -45,11 +45,14 @@ class TextConvertor:
         if index >=0:
             index = index + len(macro)
             while True:
-                if text[index].isdigit():
-                    grams += text[index]
-                elif not spaced_parse:
-                    spaced_parse = True
-                else:
+                try:
+                    if text[index].isdigit():
+                        grams += text[index]
+                    elif not spaced_parse:
+                        spaced_parse = True
+                    else:
+                        break
+                except:
                     break
                 index+=1
                 
@@ -64,7 +67,7 @@ class TextConvertor:
         the variables should in the order serving size, calories, fat, saturated fat, unsaturated fat, carbs, fiber, sugar, added sugar, protein  
         '''
         for index in range(len(self.macro_list)):
-            if self.macro_list[index] == 0 or self.macro_list[index] > new_macro_list[index]:
+            if new_macro_list[index] != 0:
                 self.macro_list[index] = new_macro_list[index] 
     
     def create_food_item(self):

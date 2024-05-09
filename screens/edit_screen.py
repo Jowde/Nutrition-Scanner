@@ -29,8 +29,8 @@ class EditScreen(gui_components.Screen):
         self.GameStateManager.current_state = 'nutrient_screens'
 
     def switch_to_auto_screen(self):
-        self.PhotoScreen.init_photo_scanner()
         self.GameStateManager.screens_index = self.foodlistscreen.find_index_of_food(self.food_info.food_name)
+        self.PhotoScreen.init_photo_scanner()
         self.GameStateManager.current_state = 'auto_screen'
         
     def run(self, pos:tuple[int,int], click: bool, pressed_keys: list):

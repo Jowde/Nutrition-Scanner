@@ -103,6 +103,8 @@ class FoodListScreen(gui_components.Screen):
         for index, screen in enumerate(self.nutrient_screens): 
             if screen.food_info.food_name == food:
                 return index
+            
+        print('uh oh')
         return -1
     
     def remove_item(self):
