@@ -17,6 +17,7 @@ class PhotoScreen(gui_components.Screen):
         self.food_name = self.FoodListScreen.food_from_index(self.GameStateManager.screens_index)
         self.photo_scanner = PhotoScanner(self.food_name)
         self.photo_scanner.setStartWindow()
+        print('here')
         
     def end_photo_scanner(self):
         self.photo_scanner.endWindow()
@@ -25,6 +26,6 @@ class PhotoScreen(gui_components.Screen):
         self.display.fill(self.bg_color)
         frame = self.photo_scanner.startPhotoWindow()
         print('hello')
-        frame = pygame.image.load(frame)
+        pygame.image.frombuffer(frame.tostring(), frame.shape[1::-1], "BGR")
         self.display.blit(frame)
         

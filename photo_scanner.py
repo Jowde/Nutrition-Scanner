@@ -53,7 +53,7 @@ class PhotoScanner:
             #sets up for next screenshot
             self.img_counter += 1
     
-        return os.path.join("images", f"opencv_frame_{self.img_counter -1}.png")
+        return frame
 
         
         #cam.destroyAllWindows()
