@@ -11,8 +11,8 @@ class EditScreen(gui_components.Screen):
         
         self.main_menu = gui_components.Menu(self.display, (.7, .7), bg_color=MENU_COLOR, layout='vertical')
         
-        self.food_list_button = gui_components.Button(self.main_menu, relative_padding=(.2, .2), text='Manual Macro Input', bg_color=BUTTON_COLOR, on_press=self.switch_to_nutrient_screen, text_size=FONT_SIZE)
-        self.exit_button = gui_components.Button(self.main_menu, text = 'Automatic Macro Input', bg_color=BUTTON_COLOR, relative_padding=(.2, .2), text_size=FONT_SIZE, on_press=pygame.quit)
+        self.man_button = gui_components.Button(self.main_menu, relative_padding=(.2, .2), text='Manual Macro Input', bg_color=BUTTON_COLOR, on_press=self.switch_to_nutrient_screen, text_size=FONT_SIZE)
+        self.auto_button = gui_components.Button(self.main_menu, text = 'Automatic Macro Input', bg_color=BUTTON_COLOR, relative_padding=(.2, .2), text_size=FONT_SIZE, on_press=pygame.quit)
         
         self.main_menu.init_widgets()
 
